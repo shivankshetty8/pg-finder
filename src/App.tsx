@@ -20,9 +20,12 @@ import {
   X,
   CheckCircle2,
   TrendingUp,
+  Plus,
+  CheckCircle,
 } from 'lucide-react';
 import { supabase } from '@/lib/supabase';
 import type { College, PgListing } from '@/types';
+import { AddPgModal } from '@/components/AddPgModal';
 
 type GenderFilter = 'All' | 'Ladies' | 'Gents' | 'Coliving';
 type SortBy = 'distance' | 'rent-low' | 'rent-high' | 'rating';
@@ -100,9 +103,17 @@ function PgCard({ pg }: { pg: PgListing }) {
       <div className="flex flex-1 flex-col p-4">
         <h3 className="text-base font-bold text-slate-900">{pg.name}</h3>
 
-        <div className="mt-1.5 flex items-center gap-1 text-xs text-slate-500">
-          <Navigation className="h-3.5 w-3.5 text-teal-600" />
-          <span>{Number(pg.distance_km).toFixed(1)} km from campus</span>
+        <div className="mt-1.5 flex items-center justify-between text-xs text-slate-500">
+          <div className="flex items-center gap-1">
+            <Navigation className="h-3.5 w-3.5 text-teal-600" />
+            <span>{Number(pg.distance_km).toFixed(1)} km from campus</span>
+          </div>
+          {pg.area && (
+            <div className="flex items-center gap-1 font-medium text-slate-600">
+              <MapPin className="h-3 w-3 text-slate-400" />
+              <span className="max-w-[110px] truncate">{pg.area}</span>
+            </div>
+          )}
         </div>
 
         {/* Amenities */}
@@ -343,6 +354,16 @@ function App() {
   const [loadingColleges, setLoadingColleges] = useState(true);
   const [loadingPgs, setLoadingPgs] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [isAddModalOpen, setIsAddModalOpen] = useState(false);
+  const [toastMessage, setToastMessage] = useState<string | null>(null);
+
+  function handlePgAdded(newListing: PgListing) {
+    setPgs((prev) => [newListing, ...prev]);
+    setToastMessage(`"${newListing.name}" has been listed successfully!`);
+    setTimeout(() => {
+      setToastMessage(null);
+    }, 5000);
+  }
 
   // Fetch all colleges once on mount
   useEffect(() => {
@@ -441,12 +462,35 @@ function App() {
               <p className="hidden text-[11px] text-slate-400 sm:block">Bangalore Student Housing</p>
             </div>
           </div>
-          <div className="flex items-center gap-2 text-xs font-medium text-slate-500">
-            <MapPin className="h-4 w-4 text-teal-600" />
-            <span className="hidden sm:inline">Bengaluru</span>
+          <div className="flex items-center gap-3">
+            <div className="hidden sm:flex items-center gap-1.5 text-xs font-medium text-slate-500">
+              <MapPin className="h-4 w-4 text-teal-600" />
+              <span>Bengaluru</span>
+            </div>
+            <button
+              onClick={() => setIsAddModalOpen(true)}
+              className="inline-flex items-center gap-1.5 rounded-xl bg-teal-600 px-3.5 py-2 text-xs font-bold text-white shadow-sm shadow-teal-600/20 transition-all hover:bg-teal-700 hover:shadow-md active:scale-95"
+            >
+              <Plus className="h-4 w-4" />
+              <span>List a PG</span>
+            </button>
           </div>
         </div>
       </header>
+
+      {/* Success Toast */}
+      {toastMessage && (
+        <div className="fixed bottom-6 right-6 z-50 flex items-center gap-2.5 rounded-2xl border border-teal-200 bg-teal-900 px-4 py-3 text-xs font-semibold text-white shadow-2xl animate-in slide-in-from-bottom-5">
+          <CheckCircle className="h-4 w-4 text-teal-300" />
+          <span>{toastMessage}</span>
+          <button
+            onClick={() => setToastMessage(null)}
+            className="ml-2 rounded p-1 text-teal-300 hover:bg-teal-800"
+          >
+            <X className="h-3 w-3" />
+          </button>
+        </div>
+      )}
 
       {/* Hero */}
       <section className="relative overflow-hidden bg-gradient-to-br from-teal-600 via-teal-700 to-cyan-800">
@@ -610,6 +654,12 @@ function App() {
           </div>
         </div>
       </footer>
+      {/* Add PG Modal */}
+      <AddPgModal
+        isOpen={isAddModalOpen}
+        onClose={() => setIsAddModalOpen(false)}
+        onPgAdded={handlePgAdded}
+      />
     </div>
   );
 }

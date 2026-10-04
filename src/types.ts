@@ -16,4 +16,18 @@ export interface PgListing {
   college_id: string | null;
   image_url: string | null;
   amenities: string[];
+  area?: string | null;
 }
+
+export interface PgFormData {
+  name: string;
+  gender: 'Ladies' | 'Gents' | 'Coliving';
+  rent: number;
+  rating: number;
+  area: string;
+  lat: number;
+  lng: number;
+  image_url: string;
+  amenities: string[];
+}
+

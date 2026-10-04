@@ -65,7 +65,8 @@ const genderStyles: Record<string, { bg: string; text: string; border: string; l
   },
 };
 
-function formatRent(rent: number): string {
+function formatRent(rent?: number | null): string {
+  if (!rent) return '8,500';
   return rent.toLocaleString('en-IN');
 }
 
@@ -106,7 +107,7 @@ function PgCard({ pg }: { pg: PgListing }) {
 
         {/* Amenities */}
         <div className="mt-3 flex flex-wrap gap-1.5">
-          {pg.amenities.slice(0, 5).map((amenity) => {
+          {(pg.amenities || []).slice(0, 5).map((amenity) => {
             const Icon = getAmenityIcon(amenity);
             return (
               <span key={amenity} className="inline-flex items-center gap-1 rounded-lg bg-slate-50 px-2 py-1 text-[10px] font-medium text-slate-600">
@@ -115,9 +116,9 @@ function PgCard({ pg }: { pg: PgListing }) {
               </span>
             );
           })}
-          {pg.amenities.length > 5 && (
+          {(pg.amenities || []).length > 5 && (
             <span className="inline-flex items-center rounded-lg bg-slate-50 px-2 py-1 text-[10px] font-medium text-slate-500">
-              +{pg.amenities.length - 5} more
+              +{(pg.amenities || []).length - 5} more
             </span>
           )}
         </div>
@@ -228,9 +229,8 @@ function CollegeSearchBar({
             <button
               key={college.id}
               onClick={() => handleSelect(college)}
-              className={`flex w-full items-center gap-3 px-4 py-2.5 text-left transition-colors ${
-                idx === highlightIndex ? 'bg-teal-50' : 'hover:bg-slate-50'
-              }`}
+              className={`flex w-full items-center gap-3 px-4 py-2.5 text-left transition-colors ${idx === highlightIndex ? 'bg-teal-50' : 'hover:bg-slate-50'
+                }`}
             >
               <div className="flex h-9 w-9 flex-shrink-0 items-center justify-center rounded-xl bg-teal-50">
                 <MapPin className="h-4 w-4 text-teal-600" />
@@ -268,11 +268,10 @@ function FilterPill({
   return (
     <button
       onClick={onClick}
-      className={`inline-flex items-center gap-1.5 whitespace-nowrap rounded-full border px-4 py-2 text-sm font-semibold transition-all duration-200 active:scale-95 ${
-        active
+      className={`inline-flex items-center gap-1.5 whitespace-nowrap rounded-full border px-4 py-2 text-sm font-semibold transition-all duration-200 active:scale-95 ${active
           ? 'border-teal-600 bg-teal-600 text-white shadow-sm shadow-teal-600/20'
           : 'border-slate-200 bg-white text-slate-600 hover:border-slate-300 hover:bg-slate-50'
-      }`}
+        }`}
     >
       {children}
     </button>
@@ -322,9 +321,8 @@ function SortDropdown({
                 onChange(key);
                 setIsOpen(false);
               }}
-              className={`flex w-full items-center justify-between px-4 py-2 text-sm transition-colors ${
-                sortBy === key ? 'bg-teal-50 font-semibold text-teal-700' : 'text-slate-600 hover:bg-slate-50'
-              }`}
+              className={`flex w-full items-center justify-between px-4 py-2 text-sm transition-colors ${sortBy === key ? 'bg-teal-50 font-semibold text-teal-700' : 'text-slate-600 hover:bg-slate-50'
+                }`}
             >
               {labels[key]}
               {sortBy === key && <CheckCircle2 className="h-4 w-4" />}
@@ -366,20 +364,20 @@ function App() {
     loadColleges();
   }, []);
 
-  // Fetch PGs from Supabase whenever the selected college changes
+  // Fetch PGs from Supabase (by selected college or featured by default)
   useEffect(() => {
     async function loadPgs() {
-      if (!selectedCollege) {
-        setPgs([]);
-        return;
-      }
       try {
         setLoadingPgs(true);
         setError(null);
-        const { data, error: err } = await supabase
-          .from('pgs')
-          .select('*')
-          .eq('college_id', selectedCollege.id);
+        let query = supabase.from('pgs').select('*');
+        if (selectedCollege) {
+          query = query.eq('college_id', selectedCollege.id);
+        } else {
+          // If no college is selected yet, show featured Bangalore PGs!
+          query = query.limit(20);
+        }
+        const { data, error: err } = await query;
         if (err) throw err;
         setPgs((data as PgListing[]) ?? []);
       } catch (err) {
@@ -478,6 +476,25 @@ function App() {
               onSelect={setSelectedCollege}
             />
           </div>
+
+          {/* Popular Colleges Quick Selection */}
+          {colleges.length > 0 && !selectedCollege && (
+            <div className="mt-4 flex flex-wrap items-center justify-center gap-2 text-xs">
+              <span className="text-teal-200">Popular:</span>
+              {colleges
+                .filter((c) => c.name && c.name.trim().length > 3)
+                .slice(0, 4)
+                .map((college) => (
+                  <button
+                    key={college.id}
+                    onClick={() => setSelectedCollege(college)}
+                    className="rounded-full bg-white/15 px-3 py-1 text-xs text-white backdrop-blur-sm transition-all hover:bg-white/25"
+                  >
+                    {college.name.split('(')[0].trim()}
+                  </button>
+                ))}
+            </div>
+          )}
         </div>
       </section>
 
@@ -528,17 +545,7 @@ function App() {
         </div>
 
         {/* Results */}
-        {!selectedCollege ? (
-          <div className="flex flex-col items-center justify-center py-24 text-center">
-            <div className="flex h-16 w-16 items-center justify-center rounded-2xl bg-teal-50">
-              <Search className="h-8 w-8 text-teal-400" />
-            </div>
-            <p className="mt-4 text-base font-semibold text-slate-700">Search for your college</p>
-            <p className="mt-1 text-sm text-slate-400">
-              Pick a college from the search bar above to see nearby PGs.
-            </p>
-          </div>
-        ) : loadingPgs ? (
+        {loadingPgs ? (
           <div className="flex flex-col items-center justify-center py-24">
             <div className="h-10 w-10 animate-spin rounded-full border-4 border-slate-200 border-t-teal-600" />
             <p className="mt-4 text-sm text-slate-500">Loading PGs...</p>
@@ -562,13 +569,22 @@ function App() {
           </div>
         ) : (
           <>
-            <p className="mb-4 text-sm text-slate-500">
-              Showing <span className="font-bold text-slate-700">{filteredPgs.length}</span>{' '}
-              {filteredPgs.length === 1 ? 'PG' : 'PGs'}
-              {selectedCollege && (
-                <> near <span className="font-semibold text-slate-700">{selectedCollege.name}</span></>
+            <div className="mb-4 flex items-center justify-between">
+              <p className="text-sm text-slate-500">
+                Showing <span className="font-bold text-slate-700">{filteredPgs.length}</span>{' '}
+                {filteredPgs.length === 1 ? 'PG' : 'PGs'}
+                {selectedCollege ? (
+                  <> near <span className="font-semibold text-slate-700">{selectedCollege.name}</span></>
+                ) : (
+                  <> in <span className="font-semibold text-slate-700">Bangalore (Featured)</span></>
+                )}
+              </p>
+              {!selectedCollege && (
+                <span className="rounded-full bg-teal-50 px-3 py-1 text-xs font-semibold text-teal-700">
+                  Featured Listings
+                </span>
               )}
-            </p>
+            </div>
             <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
               {filteredPgs.map((pg) => (
                 <PgCard key={pg.id} pg={pg} />

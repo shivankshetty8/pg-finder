@@ -458,7 +458,7 @@ function App() {
               <Home className="h-5 w-5 text-white" />
             </div>
             <div>
-              <h1 className="text-lg font-extrabold tracking-tight text-slate-900">PG Finder</h1>
+              <h1 className="text-lg font-extrabold tracking-tight text-teal-700">SKOLAR</h1>
               <p className="hidden text-[11px] text-slate-400 sm:block">Bangalore Student Housing</p>
             </div>
           </div>
@@ -646,7 +646,7 @@ function App() {
               <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-teal-600">
                 <Home className="h-4 w-4 text-white" />
               </div>
-              <span className="text-sm font-bold text-slate-800">PG Finder Bangalore</span>
+              <span className="text-sm font-extrabold tracking-wide text-teal-700">SKOLAR</span>
             </div>
             <p className="text-xs text-slate-400">
               Helping students find their home away from home.

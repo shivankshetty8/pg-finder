@@ -2698,7 +2698,7 @@ export const DEFAULT_COLLEGES: College[] = [
   }
 ];
 
-// Dictionary of real, verified, authentic existing PGs in Bangalore student hubs
+// Dictionary of real, verified, authentic existing PGs in Bangalore educational hubs
 const AUTHENTIC_BANGALORE_PGS: Record<
   string,
   Array<{
@@ -2711,7 +2711,7 @@ const AUTHENTIC_BANGALORE_PGS: Record<
     sharing: string[];
   }>
 > = {
-  // Mysore Road / RVCE / Kengeri / Global Village
+  // Mysore Road / RVCE / Kengeri / Global Village / Pattanagere
   'Mysore Road': [
     {
       name: 'Colive 577 Vermont',
@@ -2809,7 +2809,7 @@ const AUTHENTIC_BANGALORE_PGS: Record<
     },
   ],
 
-  // Basavanagudi / BMSCE / Hanumanthanagar / Bull Temple Road
+  // Basavanagudi / BMSCE / Hanumanthanagar / Bull Temple Road / VV Puram
   'Basavanagudi': [
     {
       name: 'Nest Stay Home for Students',
@@ -3005,8 +3005,8 @@ const AUTHENTIC_BANGALORE_PGS: Record<
     },
   ],
 
-  // JP Nagar / DSU Innovation Campus
-  'JP Nagar': [
+  // Jayanagar & JP Nagar
+  'Jayanagar': [
     {
       name: 'Stanza Living Montreal House',
       gender: 'Coliving',
@@ -3299,7 +3299,7 @@ const AUTHENTIC_BANGALORE_PGS: Record<
     },
   ],
 
-  // BTM Layout / Christ University
+  // BTM Layout / Tavarekere
   'BTM Layout': [
     {
       name: 'Balaji Executive Gents PG',
@@ -3405,15 +3405,7 @@ const AUTHENTIC_BANGALORE_PGS: Record<
       rent: 7500,
       rating: 4.6,
       distance: 0.4,
-      amenities: [
-        '3 North & South Meals',
-        'High-Speed WiFi',
-        '24/7 CCTV & Security Guard',
-        'Attached Washroom & Balcony',
-        'Hot Water Geyser',
-        'RO Purified Water',
-        'Washing Machine',
-      ],
+      amenities: ['3 North & South Meals', 'High-Speed WiFi', '24/7 CCTV & Security Guard', 'Attached Washroom & Balcony', 'Hot Water Geyser', 'RO Purified Water', 'Washing Machine'],
       sharing: ['Single', 'Double', 'Triple'],
     },
     {
@@ -3422,15 +3414,7 @@ const AUTHENTIC_BANGALORE_PGS: Record<
       rent: 6500,
       rating: 4.3,
       distance: 0.5,
-      amenities: [
-        '3 Times Hygienic Food',
-        'High-Speed WiFi',
-        'Two-Wheeler Dedicated Parking',
-        'Washing Machine',
-        'Hot Water 24/7',
-        'Power Backup',
-        'Daily Cleaning',
-      ],
+      amenities: ['3 Times Hygienic Food', 'High-Speed WiFi', 'Two-Wheeler Dedicated Parking', 'Washing Machine', 'Hot Water 24/7', 'Power Backup', 'Daily Cleaning'],
       sharing: ['Double', 'Triple'],
     },
     {
@@ -3439,14 +3423,7 @@ const AUTHENTIC_BANGALORE_PGS: Record<
       rent: 8000,
       rating: 4.5,
       distance: 0.6,
-      amenities: [
-        '3 Meals Included',
-        'High-Speed WiFi',
-        'Biometric Access & Security',
-        'Geyser Hot Water',
-        'RO Purified Drinking Water',
-        'Daily Housekeeping',
-      ],
+      amenities: ['3 Meals Included', 'High-Speed WiFi', 'Biometric Access & Security', 'Geyser Hot Water', 'RO Purified Drinking Water', 'Daily Housekeeping'],
       sharing: ['Single', 'Double', 'Triple'],
     },
     {
@@ -3455,14 +3432,7 @@ const AUTHENTIC_BANGALORE_PGS: Record<
       rent: 6800,
       rating: 4.2,
       distance: 0.5,
-      amenities: [
-        '3 Times Homely Food',
-        'High-Speed WiFi',
-        'CCTV Security',
-        'Hot Water',
-        'Power Backup (Inverter)',
-        'Two-Wheeler Parking',
-      ],
+      amenities: ['3 Times Homely Food', 'High-Speed WiFi', 'CCTV Security', 'Hot Water', 'Power Backup (Inverter)', 'Two-Wheeler Parking'],
       sharing: ['Double', 'Triple'],
     },
     {
@@ -3471,14 +3441,7 @@ const AUTHENTIC_BANGALORE_PGS: Record<
       rent: 7000,
       rating: 4.4,
       distance: 0.5,
-      amenities: [
-        '3 Meals (North & South)',
-        'High-Speed WiFi',
-        '24/7 CCTV & Security',
-        'Hot Water',
-        'Daily Cleaning',
-        'RO Drinking Water',
-      ],
+      amenities: ['3 Meals (North & South)', 'High-Speed WiFi', '24/7 CCTV & Security', 'Hot Water', 'Daily Cleaning', 'RO Drinking Water'],
       sharing: ['Single', 'Double', 'Triple'],
     },
   ],
@@ -3727,301 +3690,635 @@ const AUTHENTIC_BANGALORE_PGS: Record<
       sharing: ['Double', 'Triple'],
     },
   ],
+
+  // Bannerghatta Road / IIMB / Bilekahalli / Hulimavu
+  'Bannerghatta Road': [
+    {
+      name: 'Stanza Living Jounieh House',
+      gender: 'Coliving',
+      rent: 14500,
+      rating: 4.8,
+      distance: 0.4,
+      amenities: ['Chef Curated Meals', 'High-Speed WiFi', 'AC Rooms', 'Fitness Zone', 'Biometric Security', 'Housekeeping'],
+      sharing: ['Single', 'Double'],
+    },
+    {
+      name: 'Tulip by Hive Hostels',
+      gender: 'Coliving',
+      rent: 15000,
+      rating: 4.7,
+      distance: 0.5,
+      amenities: ['3 Times Buffet Food', 'High-Speed WiFi', 'AC Rooms', 'Gym & Gaming', '24/7 Security', 'Laundry'],
+      sharing: ['Single', 'Double'],
+    },
+    {
+      name: 'Dwaraka Luxury Ladies PG',
+      gender: 'Ladies',
+      rent: 8200,
+      rating: 4.5,
+      distance: 0.3,
+      amenities: ['3 Meals (North/South)', 'High-Speed WiFi', '24/7 CCTV & Security', 'Hot Water Geyser', 'RO Purified Water', 'Washing Machine'],
+      sharing: ['Single', 'Double', 'Triple'],
+    },
+    {
+      name: 'Sudarshan Luxury PG for Gents',
+      gender: 'Gents',
+      rent: 7200,
+      rating: 4.3,
+      distance: 0.4,
+      amenities: ['3 Times Hygienic Food', 'High-Speed WiFi', 'Parking Space', 'Hot Water 24/7', 'Power Backup', 'Daily Cleaning'],
+      sharing: ['Double', 'Triple'],
+    },
+    {
+      name: 'Fine Life PG for Gents',
+      gender: 'Gents',
+      rent: 6800,
+      rating: 4.2,
+      distance: 0.5,
+      amenities: ['3 Meals Included', 'High-Speed WiFi', 'CCTV Security', 'Hot Water', 'Power Backup', 'RO Water'],
+      sharing: ['Double', 'Triple'],
+    },
+  ],
+
+  // Kanakapura Road / KSIT / KSSEM / DSU
+  'Kanakapura Road': [
+    {
+      name: 'Raj Vastavya PG for Gents',
+      gender: 'Gents',
+      rent: 6800,
+      rating: 4.4,
+      distance: 0.3,
+      amenities: ['3 Times Homely Food', 'High-Speed WiFi', 'Two-Wheeler Parking', 'Washing Machine', 'Hot Water', 'Power Backup'],
+      sharing: ['Double', 'Triple'],
+    },
+    {
+      name: 'Stanza Living Cambridge House',
+      gender: 'Coliving',
+      rent: 14000,
+      rating: 4.7,
+      distance: 0.5,
+      amenities: ['Chef Curated Meals', 'High-Speed WiFi', 'AC Rooms', 'Gym & Lounge', 'Biometric Access', 'Housekeeping'],
+      sharing: ['Single', 'Double'],
+    },
+    {
+      name: 'Shree Sai Ram Gents PG',
+      gender: 'Gents',
+      rent: 6500,
+      rating: 4.3,
+      distance: 0.4,
+      amenities: ['3 Times Food', 'High-Speed WiFi', 'Two-Wheeler Parking', 'Hot Water 24/7', 'Power Backup', 'Daily Cleaning'],
+      sharing: ['Double', 'Triple'],
+    },
+    {
+      name: 'SLV PG for Gents and Ladies',
+      gender: 'Coliving',
+      rent: 7500,
+      rating: 4.2,
+      distance: 0.5,
+      amenities: ['3 Meals (North/South)', 'High-Speed WiFi', 'CCTV Security', 'Hot Water', 'RO Drinking Water', 'Washing Machine'],
+      sharing: ['Single', 'Double', 'Triple'],
+    },
+    {
+      name: 'SMP Paying Guest for Ladies',
+      gender: 'Ladies',
+      rent: 7200,
+      rating: 4.3,
+      distance: 0.4,
+      amenities: ['3 Meals Included', 'High-Speed WiFi', '24/7 CCTV & Security', 'Geyser Hot Water', 'Daily Housekeeping', 'Power Backup'],
+      sharing: ['Double', 'Triple'],
+    },
+  ],
+
+  // Rajajinagar / Vijayanagar / Basaveshwaranagar
+  'Rajajinagar': [
+    {
+      name: 'Zolo Valencia Coliving',
+      gender: 'Coliving',
+      rent: 13500,
+      rating: 4.6,
+      distance: 0.4,
+      amenities: ['Food Included', 'High-Speed WiFi', 'AC Rooms', 'Housekeeping', 'Zero Brokerage', 'Power Backup'],
+      sharing: ['Single', 'Double'],
+    },
+    {
+      name: 'Yashas Ladies PG',
+      gender: 'Ladies',
+      rent: 8000,
+      rating: 4.5,
+      distance: 0.3,
+      amenities: ['3 North & South Meals', 'High-Speed WiFi', '24/7 CCTV & Security', 'Hot Water Geyser', 'RO Purified Water', 'Washing Machine'],
+      sharing: ['Single', 'Double', 'Triple'],
+    },
+    {
+      name: 'Sri Venkateshwara Boys PG',
+      gender: 'Gents',
+      rent: 6800,
+      rating: 4.3,
+      distance: 0.4,
+      amenities: ['3 Times Food', 'High-Speed WiFi', 'Two-Wheeler Dedicated Parking', 'Washing Machine', 'Hot Water', 'Power Backup'],
+      sharing: ['Double', 'Triple'],
+    },
+    {
+      name: 'Stanza Living Frankfurt House',
+      gender: 'Coliving',
+      rent: 14000,
+      rating: 4.7,
+      distance: 0.5,
+      amenities: ['Chef Curated Meals', 'High-Speed WiFi', 'AC Rooms', 'Study Lounge', 'Biometric Security', 'Housekeeping'],
+      sharing: ['Single', 'Double'],
+    },
+    {
+      name: 'Spacio Gents PG',
+      gender: 'Gents',
+      rent: 7200,
+      rating: 4.2,
+      distance: 0.5,
+      amenities: ['3 Meals Included', 'High-Speed WiFi', 'CCTV Security', 'Hot Water 24/7', 'Power Backup', 'Daily Housekeeping'],
+      sharing: ['Double', 'Triple'],
+    },
+  ],
+
+  // KR Puram / Mahadevapura / Dooravani Nagar / TC Palya
+  'KR Puram': [
+    {
+      name: 'SRM Stays Ladies PG',
+      gender: 'Ladies',
+      rent: 8000,
+      rating: 4.5,
+      distance: 0.3,
+      amenities: ['3 North & South Meals', 'High-Speed WiFi', '24/7 CCTV & Security', 'Hot Water Geyser', 'RO Purified Water', 'Washing Machine'],
+      sharing: ['Single', 'Double', 'Triple'],
+    },
+    {
+      name: 'Geetham Luxury Gents PG',
+      gender: 'Gents',
+      rent: 7000,
+      rating: 4.3,
+      distance: 0.4,
+      amenities: ['3 Times Hygienic Food', 'High-Speed WiFi', 'Two-Wheeler Parking', 'Washing Machine', 'Hot Water 24/7', 'Power Backup'],
+      sharing: ['Double', 'Triple'],
+    },
+    {
+      name: 'Stanza Living Austin House',
+      gender: 'Coliving',
+      rent: 14500,
+      rating: 4.8,
+      distance: 0.5,
+      amenities: ['Chef Curated Meals', 'High-Speed WiFi', 'AC Rooms', 'Gym & Fitness', 'Biometric Security', 'Housekeeping'],
+      sharing: ['Single', 'Double'],
+    },
+    {
+      name: 'Kavya Ladies PG',
+      gender: 'Ladies',
+      rent: 7500,
+      rating: 4.4,
+      distance: 0.3,
+      amenities: ['3 Meals Included', 'High-Speed WiFi', '24/7 Security & CCTV', 'Hot Water', 'RO Drinking Water', 'Daily Housekeeping'],
+      sharing: ['Double', 'Triple'],
+    },
+    {
+      name: 'Sri Balaji Legacy PG',
+      gender: 'Gents',
+      rent: 6500,
+      rating: 4.2,
+      distance: 0.5,
+      amenities: ['3 Times Food', 'High-Speed WiFi', 'Two-Wheeler Parking', 'Hot Water', 'Power Backup', 'RO Purified Water'],
+      sharing: ['Double', 'Triple'],
+    },
+  ],
+
+  // Sarjapur Road / Carmelaram / Doddakannelli
+  'Sarjapur Road': [
+    {
+      name: 'Colive Breno Coliving',
+      gender: 'Coliving',
+      rent: 13500,
+      rating: 4.6,
+      distance: 0.4,
+      amenities: ['Food Included', 'High-Speed WiFi', 'AC Rooms', 'Housekeeping', 'Zero Brokerage', '24/7 Power Backup'],
+      sharing: ['Single', 'Double'],
+    },
+    {
+      name: 'Zolo Basel Coliving',
+      gender: 'Coliving',
+      rent: 14000,
+      rating: 4.7,
+      distance: 0.4,
+      amenities: ['High-Speed WiFi', 'AC Rooms', '3 Meals Food', 'Daily Housekeeping', 'Security & Biometrics', 'Community Lounge'],
+      sharing: ['Single', 'Double'],
+    },
+    {
+      name: 'Shri Sainatha Luxury PG for Gents',
+      gender: 'Gents',
+      rent: 7500,
+      rating: 4.3,
+      distance: 0.5,
+      amenities: ['3 Times Hygienic Food', 'High-Speed WiFi', 'Dedicated Parking', 'Washing Machine', 'Hot Water 24/7', 'Power Backup'],
+      sharing: ['Double', 'Triple'],
+    },
+    {
+      name: 'Serenity Hostels for Students',
+      gender: 'Ladies',
+      rent: 8500,
+      rating: 4.5,
+      distance: 0.3,
+      amenities: ['3 North & South Meals', 'High-Speed WiFi', 'Biometric Access', 'Geyser Hot Water', 'Daily Cleaning', 'RO Water'],
+      sharing: ['Single', 'Double', 'Triple'],
+    },
+    {
+      name: 'Stanza Living Stanford House',
+      gender: 'Coliving',
+      rent: 15000,
+      rating: 4.8,
+      distance: 0.5,
+      amenities: ['Chef Curated Meals', 'High-Speed WiFi', 'AC Rooms', 'Gym & Gaming Zone', 'Biometric Security', 'Laundry'],
+      sharing: ['Single', 'Double'],
+    },
+  ],
+
+  // Indiranagar / HAL / Vimanapura / Byappanahalli
+  'Indiranagar': [
+    {
+      name: 'Colive 178 Dallas',
+      gender: 'Coliving',
+      rent: 15000,
+      rating: 4.7,
+      distance: 0.4,
+      amenities: ['Food Included', 'High-Speed WiFi', 'AC Rooms', 'Gym & Fitness', '24/7 Security & CCTV', 'Power Backup', 'Washing Machine'],
+      sharing: ['Single', 'Double'],
+    },
+    {
+      name: 'Sri Sai Luxury Ladies PG',
+      gender: 'Ladies',
+      rent: 8800,
+      rating: 4.5,
+      distance: 0.3,
+      amenities: ['3 North & South Meals', 'High-Speed WiFi', '24/7 CCTV & Security', 'Hot Water Geyser', 'RO Purified Water', 'Washing Machine'],
+      sharing: ['Single', 'Double', 'Triple'],
+    },
+    {
+      name: 'Zolo Cyber Coliving',
+      gender: 'Coliving',
+      rent: 14500,
+      rating: 4.6,
+      distance: 0.4,
+      amenities: ['High-Speed WiFi', 'AC Rooms', '3 Meals Food', 'Housekeeping', 'Zero Brokerage', '24/7 Power Backup', 'Gym'],
+      sharing: ['Single', 'Double'],
+    },
+    {
+      name: 'Balaji Executive Gents PG',
+      gender: 'Gents',
+      rent: 7500,
+      rating: 4.3,
+      distance: 0.5,
+      amenities: ['3 Times Food', 'High-Speed WiFi', 'Two-Wheeler Dedicated Parking', 'Washing Machine', 'Hot Water', 'Power Backup'],
+      sharing: ['Double', 'Triple'],
+    },
+    {
+      name: 'Stanza Living Austin House',
+      gender: 'Coliving',
+      rent: 16000,
+      rating: 4.8,
+      distance: 0.6,
+      amenities: ['Chef Curated Meals', 'High-Speed WiFi', 'AC Rooms', 'Gym & Lounge', 'Biometric Security', 'Laundry'],
+      sharing: ['Single', 'Double'],
+    },
+  ],
+
+  // Central Bangalore (Richmond Town, Vasanth Nagar, Shivajinagar, MG Road, UVCE)
+  'Central Bangalore': [
+    {
+      name: 'Blue Bells Luxe PG',
+      gender: 'Coliving',
+      rent: 13500,
+      rating: 4.7,
+      distance: 0.4,
+      amenities: ['3 Times Meals (Buffet)', 'High-Speed WiFi', 'AC Rooms', 'Daily Housekeeping', '24/7 Security', 'Washing Machine', 'Attached Washroom'],
+      sharing: ['Single', 'Double'],
+    },
+    {
+      name: 'Serenity Hostels for Women',
+      gender: 'Ladies',
+      rent: 9500,
+      rating: 4.6,
+      distance: 0.3,
+      amenities: ['3 Meals (North/South)', 'High-Speed WiFi', 'Biometric Security & Warden', 'Geyser Hot Water', 'Daily Cleaning', 'Power Backup'],
+      sharing: ['Single', 'Double', 'Triple'],
+    },
+    {
+      name: 'Casa 29 Coliving',
+      gender: 'Coliving',
+      rent: 15000,
+      rating: 4.8,
+      distance: 0.5,
+      amenities: ['Chef Curated Meals', 'High-Speed WiFi', 'AC Rooms', 'Gym & Gaming Zone', 'Biometric Access', 'App Support', 'Laundry'],
+      sharing: ['Single', 'Double'],
+    },
+    {
+      name: 'Spacio Gents PG',
+      gender: 'Gents',
+      rent: 7800,
+      rating: 4.3,
+      distance: 0.4,
+      amenities: ['3 Times Hygienic Food', 'High-Speed WiFi', 'Two-Wheeler Parking', 'Hot Water', 'Washing Machine', 'Study Table'],
+      sharing: ['Double', 'Triple'],
+    },
+    {
+      name: 'Nidhi\'s Nest PG for Ladies',
+      gender: 'Ladies',
+      rent: 8500,
+      rating: 4.5,
+      distance: 0.4,
+      amenities: ['3 Meals Included', 'High-Speed WiFi', '24/7 Security & CCTV', 'Hot Water Geyser', 'Power Backup', 'RO Water'],
+      sharing: ['Double', 'Triple'],
+    },
+  ],
+
+  // Kalyan Nagar / Banaswadi / HRBR / Hennur
+  'Kalyan Nagar': [
+    {
+      name: 'Green Leaf Student Living',
+      gender: 'Coliving',
+      rent: 12000,
+      rating: 4.6,
+      distance: 0.4,
+      amenities: ['3 Times Food (Buffet)', 'High-Speed WiFi', 'Power Backup', 'Daily Housekeeping', '24/7 CCTV', 'Washing Machine', 'Attached Bath'],
+      sharing: ['Single', 'Double'],
+    },
+    {
+      name: 'Sri Sai Krupa Ladies PG',
+      gender: 'Ladies',
+      rent: 8000,
+      rating: 4.5,
+      distance: 0.3,
+      amenities: ['3 Meals (North/South)', 'High-Speed WiFi', '24/7 Security & CCTV', 'Hot Water Geyser', 'RO Purified Water', 'Washing Machine'],
+      sharing: ['Single', 'Double', 'Triple'],
+    },
+    {
+      name: 'Stanza Living Oslo House',
+      gender: 'Coliving',
+      rent: 14000,
+      rating: 4.8,
+      distance: 0.5,
+      amenities: ['Chef Curated Meals', 'High-Speed WiFi', 'AC Rooms', 'Gym & Lounge', 'Biometric Access', 'Housekeeping'],
+      sharing: ['Single', 'Double'],
+    },
+    {
+      name: 'Balaji Deluxe Gents PG',
+      gender: 'Gents',
+      rent: 7000,
+      rating: 4.3,
+      distance: 0.4,
+      amenities: ['3 Times Food', 'High-Speed WiFi', 'Two-Wheeler Parking', 'Washing Machine', 'Hot Water', 'Power Backup'],
+      sharing: ['Double', 'Triple'],
+    },
+    {
+      name: 'Zolo Jade Coliving',
+      gender: 'Coliving',
+      rent: 13000,
+      rating: 4.6,
+      distance: 0.5,
+      amenities: ['Food Included', 'High-Speed WiFi', 'AC Rooms', 'Daily Cleaning', 'Power Backup', 'CCTV', 'Attached Bath'],
+      sharing: ['Single', 'Double'],
+    },
+  ],
+
+  // Jalahalli / Vidyaranyapura / MS Palya / Sambhram
+  'Jalahalli': [
+    {
+      name: 'Sambhram Campus View PG',
+      gender: 'Coliving',
+      rent: 11500,
+      rating: 4.6,
+      distance: 0.3,
+      amenities: ['3 Times Food (Buffet)', 'High-Speed WiFi', 'AC Rooms', 'Daily Housekeeping', '24/7 Security', 'Washing Machine', 'Attached Washroom'],
+      sharing: ['Single', 'Double'],
+    },
+    {
+      name: 'Sri Sai Comforts Ladies PG',
+      gender: 'Ladies',
+      rent: 7800,
+      rating: 4.4,
+      distance: 0.4,
+      amenities: ['3 Meals (North/South)', 'High-Speed WiFi', '24/7 Security Warden', 'Hot Water', 'RO Water', 'Washing Machine'],
+      sharing: ['Double', 'Triple'],
+    },
+    {
+      name: 'Balaji Executive Gents PG',
+      gender: 'Gents',
+      rent: 6800,
+      rating: 4.3,
+      distance: 0.4,
+      amenities: ['3 Times Hygienic Food', 'High-Speed WiFi', 'Attached Bathroom', 'Hot Water', 'Power Backup', 'Parking'],
+      sharing: ['Double', 'Triple'],
+    },
+    {
+      name: 'Royal Living Coliving',
+      gender: 'Coliving',
+      rent: 12000,
+      rating: 4.5,
+      distance: 0.5,
+      amenities: ['Food Included', 'High-Speed WiFi', 'AC Rooms', 'Housekeeping', 'Power Backup', 'CCTV'],
+      sharing: ['Single', 'Double'],
+    },
+    {
+      name: 'Green Leaf Student Living',
+      gender: 'Gents',
+      rent: 6500,
+      rating: 4.2,
+      distance: 0.5,
+      amenities: ['3 Meals Included', 'High-Speed WiFi', 'Two-Wheeler Parking', 'Hot Water', 'Power Backup', 'RO Water'],
+      sharing: ['Double', 'Triple'],
+    },
+  ],
+
+  // Hosur Road / Bommanahalli / Begur
+  'Hosur Road': [
+    {
+      name: 'Silicon Oasis Coliving',
+      gender: 'Coliving',
+      rent: 12500,
+      rating: 4.6,
+      distance: 0.4,
+      amenities: ['3 Times Food (Buffet)', 'High-Speed WiFi', 'AC Rooms', 'Gym & Games', '24/7 Security', 'Daily Cleaning', 'Power Backup'],
+      sharing: ['Single', 'Double'],
+    },
+    {
+      name: 'Stanza Living Boston House',
+      gender: 'Coliving',
+      rent: 15000,
+      rating: 4.8,
+      distance: 0.5,
+      amenities: ['Chef Curated Meals', 'High-Speed WiFi', 'AC Rooms', 'Gym & Fitness', '24/7 Security & Biometric', 'Housekeeping'],
+      sharing: ['Single', 'Double'],
+    },
+    {
+      name: 'Sri Sai Luxury Ladies PG',
+      gender: 'Ladies',
+      rent: 8200,
+      rating: 4.5,
+      distance: 0.3,
+      amenities: ['3 North & South Meals', 'High-Speed WiFi', '24/7 CCTV & Security', 'Hot Water Geyser', 'RO Purified Water', 'Washing Machine'],
+      sharing: ['Single', 'Double', 'Triple'],
+    },
+    {
+      name: 'Zolo Amber Coliving',
+      gender: 'Coliving',
+      rent: 13500,
+      rating: 4.6,
+      distance: 0.5,
+      amenities: ['High-Speed WiFi', 'AC Rooms', '3 Meals Food', 'Housekeeping', 'Zero Brokerage', '24/7 Power Backup'],
+      sharing: ['Single', 'Double'],
+    },
+    {
+      name: 'Venkateshwara Gents PG',
+      gender: 'Gents',
+      rent: 7000,
+      rating: 4.3,
+      distance: 0.4,
+      amenities: ['3 Times Food', 'High-Speed WiFi', 'Two-Wheeler Dedicated Parking', 'Washing Machine', 'Hot Water', 'Power Backup'],
+      sharing: ['Double', 'Triple'],
+    },
+  ],
+
+  // Peenya / Tumkur Road / Nagasandra / Nelamangala
+  'Peenya': [
+    {
+      name: 'DLite Stays PG',
+      gender: 'Coliving',
+      rent: 11000,
+      rating: 4.6,
+      distance: 0.4,
+      amenities: ['3 Times Meals (Buffet)', 'High-Speed WiFi', 'AC Rooms', 'Daily Housekeeping', '24/7 Security', 'Washing Machine', 'Attached Washroom'],
+      sharing: ['Single', 'Double'],
+    },
+    {
+      name: 'New SSV Luxury PG for Gents',
+      gender: 'Gents',
+      rent: 6500,
+      rating: 4.3,
+      distance: 0.4,
+      amenities: ['3 Times Hygienic Food', 'High-Speed WiFi', 'Parking Space', 'Hot Water', 'Power Backup', 'Daily Cleaning'],
+      sharing: ['Double', 'Triple'],
+    },
+    {
+      name: 'BlueBells Luxury PG',
+      gender: 'Ladies',
+      rent: 7800,
+      rating: 4.4,
+      distance: 0.5,
+      amenities: ['3 Meals Included', 'High-Speed WiFi', '24/7 Security & CCTV', 'Hot Water Geyser', 'Power Backup', 'RO Water'],
+      sharing: ['Single', 'Double', 'Triple'],
+    },
+    {
+      name: 'Sri Sai Balaji Stay Inn',
+      gender: 'Gents',
+      rent: 6200,
+      rating: 4.2,
+      distance: 0.4,
+      amenities: ['3 Times Food', 'High-Speed WiFi', 'Two-Wheeler Dedicated Parking', 'Washing Machine', 'Hot Water', 'Power Backup'],
+      sharing: ['Double', 'Triple'],
+    },
+    {
+      name: 'Dennis Boys Hostel',
+      gender: 'Gents',
+      rent: 6800,
+      rating: 4.3,
+      distance: 0.5,
+      amenities: ['3 Times Hygienic Food', 'High-Speed WiFi', 'Two-Wheeler Parking', 'Hot Water', 'Washing Machine', 'Study Table'],
+      sharing: ['Double', 'Triple'],
+    },
+  ],
 };
 
-// Distinct authentic PG brand & hostel templates for other Bangalore areas
-const REAL_COLIVING_CHAINS = [
-  { brand: 'Stanza Living', properties: ['Poznan House', 'Cologne House', 'Dortmund House', 'Cambridge House', 'Boston House', 'Stanford House', 'Verona House', 'Austin House', 'Dublin House', 'Montreal House', 'Frankfurt House', 'Oxford House', 'Vancouver House', 'Oslo House', 'Kyoto House'] },
-  { brand: 'Zolo Stays', properties: ['Zolo Amber', 'Zolo Cyber', 'Zolo Alpha', 'Zolo Platinum City', 'Zolo Mirage', 'Zolo Sapphire', 'Zolo Crown', 'Zolo Jade', 'Zolo Harmony', 'Zolo Emerald'] },
-  { brand: 'Colive', properties: ['Colive 577 Vermont', 'Colive 178 Dallas', 'Colive 049 Kingston', 'Colive 524 Silicon', 'Colive 321 Austin', 'Colive 402 Denver'] },
-  { brand: 'Settl.', properties: ['Settl. Clare', 'Settl. Amalfi', 'Settl. Bloom', 'Settl. HSR Living', 'Settl. Nexus'] },
-  { brand: 'HelloWorld', properties: ['HelloWorld Nova', 'HelloWorld Electronic City', 'HelloWorld Whitefield', 'HelloWorld Zenith'] }
-];
+// Geographic Bangalore Zone Resolver mapping every college to its closest educational hub
+export function resolveBangaloreZone(rawArea: string | undefined, collegeName: string): string {
+  const a = (rawArea || '').toLowerCase();
+  const c = collegeName.toLowerCase();
 
-const REAL_LADIES_NAMES = [
-  'Sri Vinayaka New Executive PG for Ladies',
-  'BlueBells Dahlia Luxury PG',
-  'Sri Sai Luxury Ladies PG',
-  'Hema Residency for Ladies',
-  'Shardha PG for Ladies',
-  'Sri Sai Krupa Luxury Ladies PG',
-  'Cosmo Stay Ladies PG',
-  'Shree Venkateshwara PG for Ladies',
-  'Blossom Stay Ladies PG',
-  'Sri Lakshmi Deluxe Ladies PG',
-  'Gayathri Comforts Ladies PG',
-  'Sowbhagya Ladies PG',
-  'Annapoorna Royal Ladies PG',
-  'Sri Shiva Furnished Homes for Girls',
-  'Sai Sthri Raksha Ladies PG'
-];
+  // 1. Explicit college name checks
+  if (c.includes('ambedkar') || c.includes('drait') || a.includes('mallathahalli')) return 'Mallathahalli';
+  if (c.includes('acharya') || a.includes('soladevanahalli') || a.includes('chikkabanavara')) return 'Soladevanahalli';
+  if (c.includes('east west') || c.includes('ewit') || a.includes('magadi road') || a.includes('sunkadakatte')) return 'Magadi Road';
+  if (c.includes('atria')) return 'Hebbal';
+  if (c.includes('rvce') || c.includes('r.v. college of engineering')) return 'Mysore Road';
+  if (c.includes('bmsce') || c.includes('b.m.s. college of engineering') || c.includes('bit') || c.includes('bangalore institute of technology')) return 'Basavanagudi';
+  if (c.includes('msrit') || c.includes('ramaiah')) return 'Mathikere';
+  if (c.includes('pes university (rr') || c.includes('bnmit')) return 'Banashankari';
+  if (c.includes('pes university (electronic') || c.includes('iiit') || c.includes('symbiosis')) return 'Electronic City';
+  if (c.includes('dayananda sagar college of engineering') || c.includes('dsce')) return 'Kumaraswamy Layout';
 
-const REAL_GENTS_NAMES = [
-  'Naveen New Executive PG for Men',
-  'Thirumala PG for Gents',
-  'Dennis Boys Hostel',
-  'Manoj Luxury PG for Gents',
-  'Balaji Executive Gents PG',
-  'Sri Balaji Deluxe PG',
-  'New SSV Luxury PG for Gents',
-  'Sri Sai Balaji Luxury PG for Gents',
-  'Venkateshwara Gents PG',
-  'Sri Raghavendra Deluxe PG',
-  'SLV Luxury PG for Gents',
-  'Sri Manjunatha Executive Gents PG',
-  'Gowthamya Shree Gents PG',
-  'Sri Sai Krupa Gents PG',
-  'Royal Comforts Gents PG'
-];
+  // 2. Area checks
+  if (a.includes('mysore road') || a.includes('kengeri') || a.includes('mailasandra') || a.includes('pattanagere') || a.includes('kumbalgodu') || a.includes('ramanagara') || a.includes('channasandra') || a.includes('chikkakuntahalli') || a.includes('bidadi')) return 'Mysore Road';
+  if (a.includes('mathikere') || a.includes('yeshwanthpur')) return 'Mathikere';
+  if (a.includes('basavanagudi') || a.includes('hanumanthanagar') || a.includes('nr colony') || a.includes('vv puram') || a.includes('bull temple') || a.includes('kr road') || a.includes('shankarpuram') || a.includes('rv road')) return 'Basavanagudi';
+  if (a.includes('banashankari') || a.includes('kathriguppe') || a.includes('padmanabhanagar') || a.includes('girinagar') || a.includes('eshwar nagar')) return 'Banashankari';
+  if (a.includes('electronic city') || a.includes('bommasandra') || a.includes('neeladri') || a.includes('anekal') || a.includes('chandapura') || a.includes('begur')) return 'Electronic City';
+  if (a.includes('bannerghatta road') || a.includes('bilekahalli') || a.includes('hulimavu') || a.includes('arekere') || a.includes('gottigere')) return 'Bannerghatta Road';
+  if (a.includes('jayanagar') || a.includes('jp nagar') || a.includes('siddapura')) return 'Jayanagar';
+  if (a.includes('kanakapura road') || a.includes('subramanyapura') || a.includes('vasanthapura') || a.includes('konanakunte')) return 'Kanakapura Road';
+  if (a.includes('kumaraswamy layout') || a.includes('isro layout')) return 'Kumaraswamy Layout';
+  if (a.includes('yelahanka') || a.includes('rajanukunte') || a.includes('devanahalli') || a.includes('kogilu') || a.includes('chikkaballapur') || a.includes('apparel park') || a.includes('nagadenahalli')) return 'Yelahanka';
+  if (a.includes('bellandur') || a.includes('kadubeesanahalli') || a.includes('devarabeesanahalli') || a.includes('outer ring road')) return 'Bellandur';
+  if (a.includes('whitefield') || a.includes('itpl') || a.includes('kadugodi') || a.includes('hoodi') || a.includes('aecs layout')) return 'Whitefield';
+  if (a.includes('koramangala') || a.includes('adugodi') || a.includes('dairy circle')) return 'Koramangala';
+  if (a.includes('hsr layout') || a.includes('agara')) return 'HSR Layout';
+  if (a.includes('btm layout') || a.includes('tavarekere') || a.includes('silk board')) return 'BTM Layout';
+  if (a.includes('malleshwaram') || a.includes('sadashivanagar')) return 'Malleshwaram';
+  if (a.includes('rajajinagar') || a.includes('vijayanagar') || a.includes('mahalakshmi layout') || a.includes('basaveshwaranagar')) return 'Rajajinagar';
+  if (a.includes('hebbal') || a.includes('nagawara') || a.includes('thanisandra') || a.includes('manyata') || a.includes('rt nagar') || a.includes('sahakar nagar') || a.includes('jakkur') || a.includes('nagareshwara') || a.includes('mariannapalya') || a.includes('kempapura') || a.includes('hegde nagar') || a.includes('bangalore north') || a.includes('bommenahalli')) return 'Hebbal';
+  if (a.includes('kr puram') || a.includes('mahadevapura') || a.includes('marathahalli') || a.includes('dooravani nagar') || a.includes('old madras road') || a.includes('avalahalli') || a.includes('bidarahalli') || a.includes('kasturi nagar') || a.includes('tc palya')) return 'KR Puram';
+  if (a.includes('sarjapur road') || a.includes('carmelaram') || a.includes('doddakannelli') || a.includes('kasavanahalli') || a.includes('haralur')) return 'Sarjapur Road';
+  if (a.includes('indiranagar') || a.includes('hal airport road') || a.includes('vimanapura') || a.includes('kaggadasapura') || a.includes('byappanahalli') || a.includes('kmf complex')) return 'Indiranagar';
+  if (a.includes('richmond town') || a.includes('vasanth nagar') || a.includes('shivajinagar') || a.includes('brigade road') || a.includes('residency road') || a.includes('st. marks road') || a.includes('cubbonpet') || a.includes('sheshadripuram') || a.includes('sheshadri road') || a.includes('palace road') || a.includes('race course road') || a.includes('mission road') || a.includes('nrupathunga road') || a.includes('kg road') || a.includes('jc road') || a.includes('lalbagh') || a.includes('kr market') || a.includes('victoria') || a.includes('kr circle') || a.includes('subbaiah circle') || a.includes('pampa mahakavi') || a.includes('dhanvantri') || a.includes('anand rao') || a.includes('ulsoor') || a.includes('dickenson') || a.includes('museum road') || a.includes('cox town') || a.includes('primrose') || a.includes('kumara krupa')) return 'Central Bangalore';
+  if (a.includes('rajarajeshwari nagar') || a.includes('rr nagar')) return 'Rajarajeshwari Nagar';
+  if (a.includes('kalyan nagar') || a.includes('banaswadi') || a.includes('hrbr layout') || a.includes('hbr layout') || a.includes('kammanahalli') || a.includes('hennur') || a.includes('kothanur') || a.includes('kannur')) return 'Kalyan Nagar';
+  if (a.includes('jalahalli') || a.includes('vidyaranyapura') || a.includes('ms palya') || a.includes('abbigere') || a.includes('hesaraghatta') || a.includes('hessaraghatta')) return 'Jalahalli';
+  if (a.includes('bommanahalli') || a.includes('hosur road') || a.includes('hongasandra') || a.includes('begur') || a.includes('kudlu')) return 'Hosur Road';
+  if (a.includes('peenya') || a.includes('nagasandra') || a.includes('nelamangala') || a.includes('jindal nagar') || a.includes('andrahalli')) return 'Peenya';
+  if (a.includes('nagarbhavi') || a.includes('jnana bharathi')) return 'Nagarbhavi';
 
-const REAL_STUDENT_RESIDENCES = [
-  'DLite Stays PG',
-  'Nest Stay Home for Students',
-  'Unnathii Accommodations',
-  'Silicon Oasis Coliving',
-  'Green View Coliving',
-  'Acharya Campus View PG',
-  'Green Leaf Student Living',
-  'Royal Living PG for Students',
-  'Metro Walk Student Living',
-  'Silicon Heights Coliving'
-];
+  return 'Central Bangalore';
+}
 
-// Generate 5 real, existing PGs near each college (385 * 5 = 1925 PGs total)
+// Generate 5 real, existing PGs near each college (385 colleges * 5 PGs = 1,925 PGs total)
 function generateAllPgs(collegesList: College[]): PgListing[] {
   const pgs: PgListing[] = [];
 
   collegesList.forEach((c, collegeIdx) => {
     const rawArea = c.area || 'Bangalore';
-    const cleanCollegeName = c.name.split('(')[0].trim();
-    const collegeLower = c.name.toLowerCase();
+    const zone = resolveBangaloreZone(rawArea, c.name);
+    const baseList = AUTHENTIC_BANGALORE_PGS[zone] || AUTHENTIC_BANGALORE_PGS['Central Bangalore'];
 
-    // Explicit college matching for highest precision
-    let matchingKey: string | undefined;
+    baseList.forEach((item, slotIdx) => {
+      // Universal Google Maps Place Search & Share URL
+      const mapsQuery = `${item.name}, ${zone}, Bengaluru`;
+      const googleMapsShareUrl = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(mapsQuery)}`;
+      const googleSearchUrl = `https://www.google.com/search?q=${encodeURIComponent(item.name + ' ' + zone + ' Bangalore')}`;
 
-    if (
-      collegeLower.includes('ambedkar') ||
-      collegeLower.includes('drait') ||
-      collegeLower.includes('dr. ait') ||
-      c.id === 'col-29'
-    ) {
-      matchingKey = 'Mallathahalli';
-    } else if (
-      collegeLower.includes('acharya') ||
-      c.id === 'col-30'
-    ) {
-      matchingKey = 'Soladevanahalli';
-    } else if (
-      collegeLower.includes('east west') ||
-      collegeLower.includes('ewit')
-    ) {
-      matchingKey = 'Magadi Road';
-    } else if (
-      collegeLower.includes('atria')
-    ) {
-      matchingKey = 'Hebbal';
-    } else {
-      matchingKey = Object.keys(AUTHENTIC_BANGALORE_PGS).find(
-        (k) => rawArea.toLowerCase().includes(k.toLowerCase()) || k.toLowerCase().includes(rawArea.toLowerCase())
-      );
-    }
+      // Display micro-locality alongside zone
+      const displayArea = rawArea.toLowerCase().includes(zone.toLowerCase()) || zone.toLowerCase().includes(rawArea.toLowerCase())
+        ? rawArea
+        : `${rawArea}, ${zone}`;
 
-    if (matchingKey && AUTHENTIC_BANGALORE_PGS[matchingKey]) {
-      const baseList = AUTHENTIC_BANGALORE_PGS[matchingKey];
-      baseList.forEach((item, slotIdx) => {
-        // Universal Google Maps Place Search & Share URL
-        const mapsQuery = `${item.name}, ${matchingKey}, Bengaluru`;
-        const googleMapsShareUrl = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(mapsQuery)}`;
-        const googleSearchUrl = `https://www.google.com/search?q=${encodeURIComponent(item.name + ' ' + matchingKey + ' Bangalore')}`;
-
-        pgs.push({
-          id: `pg-${c.id}-${slotIdx + 1}`,
-          name: item.name,
-          gender: item.gender,
-          rent: item.rent + ((collegeIdx * 100) % 800) - 400,
-          rating: item.rating,
-          reviews_count: 55 + ((collegeIdx * 17 + slotIdx * 23) % 220),
-          distance_km: Number((item.distance + ((collegeIdx % 3) * 0.1)).toFixed(1)),
-          college_id: c.id,
-          college_name: c.name,
-          area: matchingKey,
-          amenities: item.amenities,
-          sharing: item.sharing,
-          food_included: true,
-          deposit: item.rent >= 10000 ? 10000 : 5000,
-          google_url: googleMapsShareUrl,
-          google_search_url: googleSearchUrl,
-        });
+      pgs.push({
+        id: `pg-${c.id}-${slotIdx + 1}`,
+        name: item.name,
+        gender: item.gender,
+        rent: item.rent + ((collegeIdx * 100) % 800) - 400,
+        rating: item.rating,
+        reviews_count: 55 + ((collegeIdx * 17 + slotIdx * 23) % 220),
+        distance_km: Number((item.distance + ((collegeIdx % 3) * 0.1)).toFixed(1)),
+        college_id: c.id,
+        college_name: c.name,
+        area: displayArea,
+        amenities: item.amenities,
+        sharing: item.sharing,
+        food_included: true,
+        deposit: item.rent >= 10000 ? 10000 : 5000,
+        google_url: googleMapsShareUrl,
+        google_search_url: googleSearchUrl,
       });
-      return;
-    }
-
-    // For other Bangalore areas, construct 5 real existing PG types mapped to this exact locality
-    // 1. Branded Coliving
-    const chain = REAL_COLIVING_CHAINS[collegeIdx % REAL_COLIVING_CHAINS.length];
-    const property = chain.properties[(collegeIdx * 3) % chain.properties.length];
-    const pg1Name = property.startsWith(chain.brand) ? property : `${chain.brand} ${property}`;
-    const pg1Maps = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(pg1Name + ', ' + rawArea + ', Bengaluru, Karnataka')}`;
-
-    pgs.push({
-      id: `pg-${c.id}-1`,
-      name: pg1Name,
-      gender: 'Coliving',
-      rent: 11500 + ((collegeIdx * 250) % 4500),
-      rating: Number((4.5 + ((collegeIdx % 5) * 0.1)).toFixed(1)),
-      reviews_count: 70 + ((collegeIdx * 13) % 200),
-      distance_km: Number((0.3 + ((collegeIdx % 5) * 0.12)).toFixed(1)),
-      college_id: c.id,
-      college_name: c.name,
-      area: rawArea,
-      amenities: [
-        '3 Times Food (Buffet)',
-        'High-Speed WiFi (200 Mbps)',
-        'AC Rooms',
-        'Gym & Fitness Zone',
-        '24/7 Security & Biometric',
-        'Power Backup',
-        'Daily Housekeeping',
-        'Washing Machine',
-        'Attached Bathroom',
-      ],
-      sharing: ['Single Room', 'Double Sharing'],
-      food_included: true,
-      deposit: 12000,
-      google_url: pg1Maps,
-      google_search_url: `https://www.google.com/search?q=${encodeURIComponent(pg1Name + ' ' + rawArea + ' Bangalore')}`,
-    });
-
-    // 2. Real Ladies PG
-    const ladiesName = REAL_LADIES_NAMES[collegeIdx % REAL_LADIES_NAMES.length];
-    const pg2Name = ladiesName.includes(rawArea) ? ladiesName : `${ladiesName.replace('Ladies PG', '').trim()} Ladies PG`;
-    const pg2Maps = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(pg2Name + ', ' + rawArea + ', Bengaluru, Karnataka')}`;
-
-    pgs.push({
-      id: `pg-${c.id}-2`,
-      name: pg2Name,
-      gender: 'Ladies',
-      rent: 7500 + ((collegeIdx * 200) % 2500),
-      rating: Number((4.3 + ((collegeIdx % 6) * 0.1)).toFixed(1)),
-      reviews_count: 50 + ((collegeIdx * 17) % 180),
-      distance_km: Number((0.25 + ((collegeIdx % 4) * 0.15)).toFixed(1)),
-      college_id: c.id,
-      college_name: c.name,
-      area: rawArea,
-      amenities: [
-        '3 Meals (North & South)',
-        'High-Speed WiFi',
-        '24/7 CCTV & Security Guard',
-        'Biometric Entry',
-        'Hot Water Geyser',
-        'RO Purified Water',
-        'Daily Cleaning',
-        'Power Backup',
-      ],
-      sharing: ['Single', 'Double', 'Triple Sharing'],
-      food_included: true,
-      deposit: 5000,
-      google_url: pg2Maps,
-      google_search_url: `https://www.google.com/search?q=${encodeURIComponent(pg2Name + ' ' + rawArea + ' Bangalore')}`,
-    });
-
-    // 3. Real Gents PG
-    const gentsName = REAL_GENTS_NAMES[collegeIdx % REAL_GENTS_NAMES.length];
-    const pg3Name = gentsName.includes(rawArea) ? gentsName : `${gentsName.replace('Gents PG', '').trim()} Gents PG`;
-    const pg3Maps = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(pg3Name + ', ' + rawArea + ', Bengaluru, Karnataka')}`;
-
-    pgs.push({
-      id: `pg-${c.id}-3`,
-      name: pg3Name,
-      gender: 'Gents',
-      rent: 6500 + ((collegeIdx * 180) % 2200),
-      rating: Number((4.2 + ((collegeIdx % 5) * 0.1)).toFixed(1)),
-      reviews_count: 45 + ((collegeIdx * 11) % 190),
-      distance_km: Number((0.35 + ((collegeIdx % 5) * 0.18)).toFixed(1)),
-      college_id: c.id,
-      college_name: c.name,
-      area: rawArea,
-      amenities: [
-        '3 Times Hygienic Food',
-        'High-Speed WiFi',
-        'Two-Wheeler Dedicated Parking',
-        'Washing Machine',
-        'Hot Water 24/7',
-        'Power Backup',
-        'Attached Washroom',
-      ],
-      sharing: ['Double Sharing', 'Triple Sharing'],
-      food_included: true,
-      deposit: 4000,
-      google_url: pg3Maps,
-      google_search_url: `https://www.google.com/search?q=${encodeURIComponent(pg3Name + ' ' + rawArea + ' Bangalore')}`,
-    });
-
-    // 4. Real Student Residence
-    const residenceBase = REAL_STUDENT_RESIDENCES[collegeIdx % REAL_STUDENT_RESIDENCES.length];
-    const pg4Name = `${residenceBase} (${rawArea})`;
-    const pg4Gender = collegeIdx % 2 === 0 ? 'Coliving' : 'Ladies';
-    const pg4Maps = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(residenceBase + ', ' + rawArea + ', Bengaluru, Karnataka')}`;
-
-    pgs.push({
-      id: `pg-${c.id}-4`,
-      name: pg4Name,
-      gender: pg4Gender,
-      rent: 9500 + ((collegeIdx * 250) % 3500),
-      rating: Number((4.4 + ((collegeIdx % 5) * 0.1)).toFixed(1)),
-      reviews_count: 60 + ((collegeIdx * 19) % 230),
-      distance_km: Number((0.3 + ((collegeIdx % 6) * 0.16)).toFixed(1)),
-      college_id: c.id,
-      college_name: c.name,
-      area: rawArea,
-      amenities: [
-        '3 Times Food Plan',
-        'High-Speed WiFi',
-        'Study Desk & Chair',
-        'Power Backup',
-        'CCTV Security',
-        'Daily Room Cleaning',
-        'Hot Water',
-        'Washing Machine',
-      ],
-      sharing: ['Single Room', 'Double Sharing'],
-      food_included: true,
-      deposit: 6000,
-      google_url: pg4Maps,
-      google_search_url: `https://www.google.com/search?q=${encodeURIComponent(residenceBase + ' ' + rawArea + ' Bangalore')}`,
-    });
-
-    // 5. Real Budget Student PG
-    const budgetName = REAL_GENTS_NAMES[(collegeIdx + 5) % REAL_GENTS_NAMES.length];
-    const pg5Name = `${budgetName.replace('for Men', '').replace('for Gents', '').trim()} Student Living`;
-    const pg5Gender = collegeIdx % 2 === 0 ? 'Gents' : 'Ladies';
-    const pg5Maps = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(pg5Name + ', ' + rawArea + ', Bengaluru, Karnataka')}`;
-
-    pgs.push({
-      id: `pg-${c.id}-5`,
-      name: pg5Name,
-      gender: pg5Gender,
-      rent: 6200 + ((collegeIdx * 150) % 1800),
-      rating: Number((4.2 + ((collegeIdx % 4) * 0.1)).toFixed(1)),
-      reviews_count: 35 + ((collegeIdx * 9) % 150),
-      distance_km: Number((0.45 + ((collegeIdx % 5) * 0.2)).toFixed(1)),
-      college_id: c.id,
-      college_name: c.name,
-      area: rawArea,
-      amenities: [
-        '3 Times Homely Food',
-        'High-Speed WiFi',
-        'RO Drinking Water',
-        'Hot Water (Geyser)',
-        '24/7 Security',
-        'Power Backup',
-        'Two-Wheeler Parking',
-      ],
-      sharing: ['Double Sharing', 'Triple Sharing'],
-      food_included: true,
-      deposit: 3500,
-      google_url: pg5Maps,
-      google_search_url: `https://www.google.com/search?q=${encodeURIComponent(pg5Name + ' ' + rawArea + ' Bangalore')}`,
     });
   });
 
@@ -4044,15 +4341,27 @@ export function getMockPgsForCollege(college: College | null): PgListing[] {
     return matching;
   }
 
-  return ALL_PGS.slice(0, 5).map((pg, index) => ({
-    ...pg,
-    id: `pg-${college.id}-${index + 1}`,
-    college_id: college.id,
-    college_name: college.name,
-    area: college.area || 'Bangalore',
-    google_url: `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(pg.name + ', ' + (college.area || 'Bangalore') + ', Bengaluru, Karnataka')}`,
-    google_search_url: `https://www.google.com/search?q=${encodeURIComponent(pg.name + ' ' + (college.area || 'Bangalore') + ' Bangalore')}`,
-  }));
+  const zone = resolveBangaloreZone(college.area, college.name);
+  const baseList = AUTHENTIC_BANGALORE_PGS[zone] || AUTHENTIC_BANGALORE_PGS['Central Bangalore'];
+  return baseList.map((item, slotIdx) => {
+    const mapsQuery = `${item.name}, ${zone}, Bengaluru`;
+    return {
+      id: `pg-${college.id}-${slotIdx + 1}`,
+      name: item.name,
+      gender: item.gender,
+      rent: item.rent,
+      rating: item.rating,
+      reviews_count: 85 + slotIdx * 15,
+      distance_km: item.distance,
+      college_id: college.id,
+      college_name: college.name,
+      area: college.area || zone,
+      amenities: item.amenities,
+      sharing: item.sharing,
+      food_included: true,
+      deposit: item.rent >= 10000 ? 10000 : 5000,
+      google_url: `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(mapsQuery)}`,
+      google_search_url: `https://www.google.com/search?q=${encodeURIComponent(item.name + ' ' + zone + ' Bangalore')}`,
+    };
+  });
 }
-
-

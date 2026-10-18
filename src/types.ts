@@ -14,9 +14,15 @@ export interface PgListing {
   rating: number;
   distance_km: number;
   college_id: string | null;
-  image_url: string | null;
+  image_url?: string | null;
   amenities: string[];
   area?: string | null;
+  college_name?: string | null;
+  google_url?: string;
+  reviews_count?: number;
+  sharing?: string[];
+  deposit?: number;
+  food_included?: boolean;
 }
 
 export interface PgFormData {

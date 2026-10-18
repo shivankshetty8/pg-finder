@@ -982,6 +982,13 @@ export const DEFAULT_COLLEGES: College[] = [
     "lng": 77.68
   },
   {
+    "id": "col-141",
+    "name": "CMR University (City Campus)",
+    "area": "HRBR Layout",
+    "lat": 13.016,
+    "lng": 77.65
+  },
+  {
     "id": "col-142",
     "name": "CMR Center for Business Studies",
     "area": "Banaswadi",
@@ -2681,143 +2688,283 @@ export const DEFAULT_COLLEGES: College[] = [
     "area": "Mathikere",
     "lat": 13.0355,
     "lng": 77.5665
+  },
+  {
+    "id": "col-385",
+    "name": "Indian Institute of Science (IISc Bangalore)",
+    "area": "Malleshwaram",
+    "lat": 13.0219,
+    "lng": 77.5671
   }
 ];
 
-export const DEFAULT_PGS: PgListing[] = [
-  {
-    id: 'pg-1',
-    name: 'Stanza Living Boston House',
-    gender: 'Coliving',
-    rent: 16500,
-    rating: 4.7,
-    distance_km: 1.2,
-    college_id: '5',
-    area: 'Koramangala 4th Block',
-    image_url: 'https://images.unsplash.com/photo-1522771739844-6a9f6d5f14af?auto=format&fit=crop&w=800&q=80',
-    amenities: ['WiFi', 'Food', 'AC', 'Gym', 'Laundry', '24/7 Security', 'Housekeeping'],
-  },
-  {
-    id: 'pg-2',
-    name: 'Sri Sai Luxury Ladies PG',
-    gender: 'Ladies',
-    rent: 8500,
-    rating: 4.5,
-    distance_km: 0.8,
-    college_id: '5',
-    area: 'Koramangala 7th Block',
-    image_url: 'https://images.unsplash.com/photo-1598928506311-c55ded91a20c?auto=format&fit=crop&w=800&q=80',
-    amenities: ['WiFi', 'Food', '24/7 Security', 'Hot Water', 'Laundry'],
-  },
-  {
-    id: 'pg-3',
-    name: 'Ramaiah Premium Student Living',
-    gender: 'Gents',
-    rent: 11000,
-    rating: 4.8,
-    distance_km: 0.5,
-    college_id: '2',
-    area: 'Mathikere',
-    image_url: 'https://images.unsplash.com/photo-1595526114035-0d45ed16cfbf?auto=format&fit=crop&w=800&q=80',
-    amenities: ['WiFi', 'Food', 'Gym', 'Laundry', '24/7 Security'],
-  },
-  {
-    id: 'pg-4',
-    name: 'Green View Ladies PG',
-    gender: 'Ladies',
-    rent: 8000,
-    rating: 4.4,
-    distance_km: 0.7,
-    college_id: '2',
-    area: 'Mathikere',
-    image_url: 'https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?auto=format&fit=crop&w=800&q=80',
-    amenities: ['WiFi', 'Food', '24/7 Security', 'Hot Water'],
-  },
-  {
-    id: 'pg-5',
-    name: 'Zolo Amber Coliving',
-    gender: 'Coliving',
-    rent: 14000,
-    rating: 4.6,
-    distance_km: 1.5,
-    college_id: '5',
-    area: 'HSR Layout Sector 2',
-    image_url: 'https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?auto=format&fit=crop&w=800&q=80',
-    amenities: ['WiFi', 'AC', 'Food', 'Parking', 'Housekeeping'],
-  },
-  {
-    id: 'pg-6',
-    name: 'Venkateshwara Gents PG',
-    gender: 'Gents',
-    rent: 7500,
-    rating: 4.2,
-    distance_km: 1.1,
-    college_id: '4',
-    area: 'HSR Layout Sector 1',
-    image_url: 'https://images.unsplash.com/photo-1555854877-bab0e564b8d5?auto=format&fit=crop&w=800&q=80',
-    amenities: ['WiFi', 'Food', 'Hot Water', 'Parking'],
-  },
-  {
-    id: 'pg-7',
-    name: 'Silicon Oasis Coliving',
-    gender: 'Coliving',
-    rent: 12500,
-    rating: 4.5,
-    distance_km: 0.9,
-    college_id: '10',
-    area: 'Electronic City Phase 1',
-    image_url: 'https://images.unsplash.com/photo-1513694203232-719a280e022f?auto=format&fit=crop&w=800&q=80',
-    amenities: ['WiFi', 'AC', 'Food', 'Gym', 'Parking'],
-  },
-  {
-    id: 'pg-8',
-    name: 'Cosmo Stay Ladies PG',
-    gender: 'Ladies',
-    rent: 9500,
-    rating: 4.3,
-    distance_km: 1.8,
-    college_id: '9',
-    area: 'Whitefield',
-    image_url: 'https://images.unsplash.com/photo-1586023492125-27b2c045efd7?auto=format&fit=crop&w=800&q=80',
-    amenities: ['WiFi', 'Food', '24/7 Security', 'Laundry', 'Power Backup'],
-  },
-  {
-    id: 'pg-9',
-    name: 'Balaji Executive Gents PG',
-    gender: 'Gents',
-    rent: 7000,
-    rating: 4.1,
-    distance_km: 1.4,
-    college_id: '3',
-    area: 'BTM 2nd Stage',
-    image_url: 'https://images.unsplash.com/photo-1540518614846-7ede433c4ef4?auto=format&fit=crop&w=800&q=80',
-    amenities: ['WiFi', 'Food', 'Parking', 'Hot Water'],
-  },
-  {
-    id: 'pg-10',
-    name: 'Elite Urban Living for Students',
-    gender: 'Coliving',
-    rent: 15000,
-    rating: 4.9,
-    distance_km: 0.6,
-    college_id: '1',
-    area: 'Mysore Road / Kengeri',
-    image_url: 'https://images.unsplash.com/photo-1505691938895-1758d7feb511?auto=format&fit=crop&w=800&q=80',
-    amenities: ['WiFi', 'Food', 'AC', 'Gym', 'Security', 'Laundry'],
-  },
+const COLIVING_BRANDS = [
+  'Zolo Stays',
+  'Stanza Living',
+  'Settl.',
+  'HelloWorld',
+  'Isthara Parks',
+  'Your Space',
+  'Boston Living',
+  'Olive Coliving',
+  'StayAbode',
+  'Flock Coliving'
 ];
 
-export function getMockPgsForCollege(college: College | null): PgListing[] {
-  if (!college) return DEFAULT_PGS;
-  
-  // Return PGs matching college or adjust distance based on college
-  const matching = DEFAULT_PGS.filter((pg) => pg.college_id === college.id);
-  if (matching.length > 0) return matching;
+const COLIVING_HOUSES = [
+  'Emerald House',
+  'Boston House',
+  'Zenith Suites',
+  'Stanford Living',
+  'Amber Heights',
+  'Oxford Residency',
+  'Nova Living',
+  'Sapphire Court',
+  'Milano Suites',
+  'Aura Residency'
+];
 
-  // Otherwise, return all PGs with calculated mock distances
-  return DEFAULT_PGS.map((pg, index) => ({
+const LADIES_PREFIXES = [
+  'Sri Lakshmi Deluxe',
+  'Blossom Stay',
+  'Sri Sai Krupa',
+  'Sowbhagya Executive',
+  'Vandana Comforts',
+  'Sita Ram Luxury',
+  'Gayathri Comforts',
+  'Pragathi Luxury',
+  'Shubham Executive',
+  'Annapoorna Royal'
+];
+
+const GENTS_PREFIXES = [
+  'Balaji Executive',
+  'Venkateshwara Deluxe',
+  'Sri Manjunatha',
+  'Royal Comforts',
+  'Maruthi Luxury',
+  'Anjaneya Executive',
+  'Ganesh Comforts',
+  'Surya Deluxe',
+  'Sri Raghavendra',
+  'Sai Balaji'
+];
+
+const STUDENT_RESIDENCES = [
+  'Green Leaf',
+  'Silicon Oasis',
+  'Urban Campus',
+  'Metro Walk',
+  'Elite Heights',
+  'Aura Student Living',
+  'Nexus Living',
+  'Highland Campus',
+  'Silicon Heights',
+  'Campus View'
+];
+
+const BUDGET_PREFIXES = [
+  'SLV Comforts',
+  'Sri Raghavendra',
+  'Sai Krupa',
+  'Annapoorna Deluxe',
+  'Om Sri',
+  'Shiva Shakthi',
+  'Vinayaka Comforts',
+  'Nandi Executive',
+  'Sri Srinivasa',
+  'Chamundeshwari'
+];
+
+// Generate 5 realistic, hyper-local PGs near each college (385 * 5 = 1925 PGs total)
+function generateAllPgs(collegesList: College[]): PgListing[] {
+  const pgs: PgListing[] = [];
+
+  collegesList.forEach((c, i) => {
+    const area = c.area || 'Bangalore';
+    const cleanCollegeName = c.name.split('(')[0].trim();
+
+    // 1. Premium Coliving (Co-living / Unisex)
+    const brand = COLIVING_BRANDS[i % COLIVING_BRANDS.length];
+    const house = COLIVING_HOUSES[i % COLIVING_HOUSES.length];
+    const pg1Name = `${brand} ${house}`;
+    pgs.push({
+      id: `pg-${c.id}-1`,
+      name: pg1Name,
+      gender: 'Coliving',
+      rent: 11500 + ((i * 350) % 5500),
+      rating: Number((4.5 + ((i % 5) * 0.1)).toFixed(1)),
+      reviews_count: 65 + ((i * 13) % 240),
+      distance_km: Number((0.3 + ((i % 5) * 0.12)).toFixed(1)),
+      college_id: c.id,
+      college_name: c.name,
+      area: area,
+      amenities: [
+        '3 Times Food (Buffet)',
+        'High-Speed WiFi (200 Mbps)',
+        'Air Conditioning (AC)',
+        'Gym & Fitness Zone',
+        '24/7 Security & Biometric',
+        'Power Backup',
+        'Daily Housekeeping',
+        'Washing Machine & Dryer',
+        'Attached Bathroom',
+      ],
+      sharing: ['Single Room', 'Double Sharing'],
+      food_included: true,
+      deposit: 12000,
+      google_url: `https://www.google.com/search?q=${encodeURIComponent(pg1Name + ' ' + area + ' Bangalore PG')}`,
+    });
+
+    // 2. High-Demand Ladies PG (Women Only)
+    const ladiesPrefix = LADIES_PREFIXES[i % LADIES_PREFIXES.length];
+    const pg2Name = `${ladiesPrefix} Ladies PG`;
+    pgs.push({
+      id: `pg-${c.id}-2`,
+      name: pg2Name,
+      gender: 'Ladies',
+      rent: 7500 + ((i * 250) % 3000),
+      rating: Number((4.3 + ((i % 6) * 0.1)).toFixed(1)),
+      reviews_count: 45 + ((i * 17) % 190),
+      distance_km: Number((0.2 + ((i % 4) * 0.2)).toFixed(1)),
+      college_id: c.id,
+      college_name: c.name,
+      area: area,
+      amenities: [
+        '3 Meals (North & South)',
+        'High-Speed WiFi',
+        '24/7 CCTV & Security',
+        'Biometric Access',
+        'Hot Water Geyser',
+        'RO Purified Water',
+        'Daily Cleaning',
+        'Power Backup',
+      ],
+      sharing: ['Single', 'Double', 'Triple Sharing'],
+      food_included: true,
+      deposit: 5000,
+      google_url: `https://www.google.com/search?q=${encodeURIComponent(pg2Name + ' ' + area + ' Bangalore')}`,
+    });
+
+    // 3. Popular Gents PG (Men Only)
+    const gentsPrefix = GENTS_PREFIXES[i % GENTS_PREFIXES.length];
+    const pg3Name = `${gentsPrefix} Gents PG`;
+    pgs.push({
+      id: `pg-${c.id}-3`,
+      name: pg3Name,
+      gender: 'Gents',
+      rent: 6500 + ((i * 200) % 2500),
+      rating: Number((4.2 + ((i % 5) * 0.1)).toFixed(1)),
+      reviews_count: 40 + ((i * 11) % 210),
+      distance_km: Number((0.4 + ((i % 5) * 0.2)).toFixed(1)),
+      college_id: c.id,
+      college_name: c.name,
+      area: area,
+      amenities: [
+        '3 Times Hygienic Food',
+        'High-Speed WiFi',
+        'Two-Wheeler Dedicated Parking',
+        'Washing Machine',
+        'Hot Water 24/7',
+        'Power Backup',
+        'Attached Washroom',
+      ],
+      sharing: ['Double Sharing', 'Triple Sharing'],
+      food_included: true,
+      deposit: 4000,
+      google_url: `https://www.google.com/search?q=${encodeURIComponent(pg3Name + ' ' + area + ' Bangalore')}`,
+    });
+
+    // 4. Deluxe Campus Residence / Studio Stay
+    const residenceName = STUDENT_RESIDENCES[i % STUDENT_RESIDENCES.length];
+    const pg4Name = `${residenceName} Student Living`;
+    const pg4Gender = i % 2 === 0 ? 'Coliving' : 'Ladies';
+    pgs.push({
+      id: `pg-${c.id}-4`,
+      name: pg4Name,
+      gender: pg4Gender,
+      rent: 9500 + ((i * 300) % 4000),
+      rating: Number((4.4 + ((i % 5) * 0.1)).toFixed(1)),
+      reviews_count: 55 + ((i * 19) % 250),
+      distance_km: Number((0.35 + ((i % 6) * 0.18)).toFixed(1)),
+      college_id: c.id,
+      college_name: c.name,
+      area: area,
+      amenities: [
+        '3 Times Food Plan',
+        'High-Speed WiFi',
+        'Study Desk & Chair',
+        'Power Backup',
+        'CCTV Security',
+        'Daily Room Cleaning',
+        'Hot Water',
+        'Washing Machine',
+      ],
+      sharing: ['Single Room', 'Double Sharing'],
+      food_included: true,
+      deposit: 6000,
+      google_url: `https://www.google.com/search?q=${encodeURIComponent(pg4Name + ' near ' + cleanCollegeName + ' Bangalore')}`,
+    });
+
+    // 5. Budget-Friendly Student PG
+    const budgetPrefix = BUDGET_PREFIXES[i % BUDGET_PREFIXES.length];
+    const pg5Name = `${budgetPrefix} Student PG`;
+    const pg5Gender = i % 2 === 0 ? 'Gents' : 'Ladies';
+    pgs.push({
+      id: `pg-${c.id}-5`,
+      name: pg5Name,
+      gender: pg5Gender,
+      rent: 6000 + ((i * 180) % 2000),
+      rating: Number((4.1 + ((i % 5) * 0.1)).toFixed(1)),
+      reviews_count: 30 + ((i * 9) % 180),
+      distance_km: Number((0.5 + ((i % 5) * 0.22)).toFixed(1)),
+      college_id: c.id,
+      college_name: c.name,
+      area: area,
+      amenities: [
+        '3 Times Homely Food',
+        'High-Speed WiFi',
+        'RO Drinking Water',
+        'Hot Water (Geyser)',
+        '24/7 Security',
+        'Power Backup',
+        'Two-Wheeler Parking',
+      ],
+      sharing: ['Double Sharing', 'Triple Sharing'],
+      food_included: true,
+      deposit: 3500,
+      google_url: `https://www.google.com/search?q=${encodeURIComponent(pg5Name + ' ' + area + ' Bangalore')}`,
+    });
+  });
+
+  return pgs;
+}
+
+// Exactly 385 colleges * 5 PGs = 1,925 PGs
+export const ALL_PGS: PgListing[] = generateAllPgs(DEFAULT_COLLEGES);
+export const DEFAULT_PGS: PgListing[] = ALL_PGS;
+export const TOTAL_PGS_COUNT = ALL_PGS.length; // 1925
+
+// Retrieve PGs for a specific college
+export function getMockPgsForCollege(college: College | null): PgListing[] {
+  if (!college) {
+    // Return first 5 PGs as sample
+    return ALL_PGS.slice(0, 5);
+  }
+
+  const matching = ALL_PGS.filter((pg) => pg.college_id === college.id);
+  if (matching.length > 0) {
+    return matching;
+  }
+
+  // Fallback (should not occur since all 385 colleges have 5 PGs)
+  return ALL_PGS.slice(0, 5).map((pg, index) => ({
     ...pg,
-    distance_km: Number((0.4 + (index % 5) * 0.4).toFixed(1)),
+    id: `pg-${college.id}-${index + 1}`,
     college_id: college.id,
+    college_name: college.name,
+    area: college.area || 'Bangalore',
+    google_url: `https://www.google.com/search?q=${encodeURIComponent(pg.name + ' near ' + college.name + ' Bangalore')}`,
   }));
 }
+

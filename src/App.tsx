@@ -27,6 +27,7 @@ import { supabase, isSupabaseConfigured } from '@/lib/supabase';
 import type { College, PgListing } from '@/types';
 import { AddPgModal } from '@/components/AddPgModal';
 import { DEFAULT_COLLEGES, getMockPgsForCollege } from '@/lib/mockData';
+import MicroSlats from './components/MicroSlats';
 
 type GenderFilter = 'All' | 'Ladies' | 'Gents' | 'Coliving';
 type SortBy = 'distance' | 'rent-low' | 'rent-high' | 'rating';
@@ -543,20 +544,41 @@ function App() {
       )}
 
       {/* Hero */}
-      <section className="relative overflow-hidden bg-gradient-to-br from-teal-600 via-teal-700 to-cyan-800">
-        <div className="absolute inset-0 opacity-10">
-          <div className="absolute -right-20 -top-20 h-72 w-72 rounded-full bg-white" />
-          <div className="absolute -bottom-32 -left-10 h-80 w-80 rounded-full bg-white" />
+      {/* Hero with MicroSlats Interactive Background */}
+      <section className="relative overflow-hidden bg-black" style={{ width: '100%', minHeight: '600px', position: 'relative' }}>
+        {/* MicroSlats Background */}
+        <div style={{ width: '100%', height: '100%', position: 'absolute', inset: 0 }}>
+          <MicroSlats
+            preset="swell"
+            color="#A855F7"
+            glintColor="#ffffff"
+            backgroundColor="#000000"
+            slatWidth={10}
+            slatHeight={25}
+            gap={3}
+            roundness={0.75}
+            interactive
+            cursorStrength={1}
+            cursorSize={40}
+            swirl={0}
+            trail={1.4}
+            lean={0}
+            intro
+          />
         </div>
-        <div className="relative mx-auto max-w-3xl px-4 py-14 text-center sm:px-6 sm:py-20">
-          <span className="inline-flex items-center gap-1.5 rounded-full bg-white/15 px-3 py-1 text-xs font-semibold text-white backdrop-blur-sm">
-            <Sparkles className="h-3.5 w-3.5" />
+
+        {/* Ambient Gradient Overlay for Readability */}
+        <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/35 to-black/85 pointer-events-none" />
+
+        <div className="relative z-10 mx-auto max-w-3xl px-4 py-16 text-center sm:px-6 sm:py-24">
+          <span className="inline-flex items-center gap-1.5 rounded-full bg-purple-500/20 border border-purple-400/30 px-3.5 py-1 text-xs font-semibold text-purple-200 backdrop-blur-md shadow-lg shadow-purple-900/30">
+            <Sparkles className="h-3.5 w-3.5 text-purple-300" />
             Find your perfect stay near campus
           </span>
           <h2 className="mt-5 text-3xl font-extrabold leading-tight tracking-tight text-white sm:text-5xl">
             Find PGs near your<br className="hidden sm:block" /> college in Bangalore
           </h2>
-          <p className="mx-auto mt-4 max-w-xl text-sm text-teal-50 sm:text-base">
+          <p className="mx-auto mt-4 max-w-xl text-sm text-purple-100/80 sm:text-base">
             {loadingColleges
               ? 'Loading colleges...'
               : `Search from ${colleges.length} colleges and discover verified PGs with rent, ratings, amenities, and distance — all in one place.`}
@@ -572,12 +594,12 @@ function App() {
 
             {/* College Status Indicator */}
             {dbStatus === 'connected' ? (
-              <div className="mt-3.5 flex items-center justify-center gap-2 text-xs text-teal-200">
+              <div className="mt-3.5 flex items-center justify-center gap-2 text-xs text-purple-200">
                 <span className="h-2 w-2 rounded-full bg-emerald-400 animate-pulse" />
                 <span>Connected to Supabase live database ({colleges.length} colleges loaded)</span>
               </div>
             ) : (
-              <div className="mt-3.5 flex items-center justify-center gap-2 text-xs text-teal-100/90">
+              <div className="mt-3.5 flex items-center justify-center gap-2 text-xs text-purple-200/90">
                 <span className="h-2 w-2 rounded-full bg-emerald-400" />
                 <span><strong>{colleges.length} Bangalore colleges</strong> available across Engineering, Medical, Arts & Commerce</span>
               </div>
@@ -586,8 +608,8 @@ function App() {
 
           {/* Popular Colleges Quick Selection */}
           {colleges.length > 0 && !selectedCollege && (
-            <div className="mt-4 flex flex-wrap items-center justify-center gap-2 text-xs">
-              <span className="text-teal-200">Popular:</span>
+            <div className="mt-5 flex flex-wrap items-center justify-center gap-2 text-xs">
+              <span className="text-purple-300 font-medium">Popular:</span>
               {colleges
                 .filter((c) => c.name && c.name.trim().length > 3)
                 .slice(0, 4)
@@ -595,7 +617,7 @@ function App() {
                   <button
                     key={college.id}
                     onClick={() => setSelectedCollege(college)}
-                    className="rounded-full bg-white/15 px-3 py-1 text-xs text-white backdrop-blur-sm transition-all hover:bg-white/25"
+                    className="rounded-full bg-white/10 border border-white/15 px-3 py-1 text-xs text-white backdrop-blur-md transition-all hover:bg-white/25 hover:border-white/30"
                   >
                     {college.name.split('(')[0].trim()}
                   </button>

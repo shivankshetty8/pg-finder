@@ -2,157 +2,17 @@ import { useEffect, useState, useMemo, useRef } from 'react';
 import {
   Search,
   MapPin,
-  Star,
-  IndianRupee,
-  Navigation,
-  Wifi,
-  UtensilsCrossed,
-  WashingMachine,
-  Dumbbell,
-  Snowflake,
-  ShieldCheck,
-  Car,
-  Droplets,
   Sparkles,
   Home,
-  Users,
-  Heart,
   X,
   CheckCircle2,
-  TrendingUp,
-  Plus,
-  CheckCircle,
+  Building2,
+  Compass,
 } from 'lucide-react';
 import { supabase, isSupabaseConfigured } from '@/lib/supabase';
-import type { College, PgListing } from '@/types';
-import { AddPgModal } from '@/components/AddPgModal';
-import { DEFAULT_COLLEGES, getMockPgsForCollege } from '@/lib/mockData';
+import type { College } from '@/types';
+import { DEFAULT_COLLEGES } from '@/lib/mockData';
 import MicroSlats from './components/MicroSlats';
-
-type GenderFilter = 'All' | 'Ladies' | 'Gents' | 'Coliving';
-type SortBy = 'distance' | 'rent-low' | 'rent-high' | 'rating';
-
-const amenityIconMap: Record<string, typeof Wifi> = {
-  WiFi: Wifi,
-  Food: UtensilsCrossed,
-  Laundry: WashingMachine,
-  Gym: Dumbbell,
-  AC: Snowflake,
-  '24/7 Security': ShieldCheck,
-  Security: ShieldCheck,
-  Parking: Car,
-  'Hot Water': Droplets,
-  Housekeeping: Sparkles,
-};
-
-function getAmenityIcon(amenity: string) {
-  return amenityIconMap[amenity] ?? Home;
-}
-
-const genderStyles: Record<string, { bg: string; text: string; border: string; label: string }> = {
-  Ladies: {
-    bg: 'bg-rose-50',
-    text: 'text-rose-700',
-    border: 'border-rose-200',
-    label: 'Ladies',
-  },
-  Gents: {
-    bg: 'bg-sky-50',
-    text: 'text-sky-700',
-    border: 'border-sky-200',
-    label: 'Gents',
-  },
-  Coliving: {
-    bg: 'bg-emerald-50',
-    text: 'text-emerald-700',
-    border: 'border-emerald-200',
-    label: 'Coliving',
-  },
-};
-
-function formatRent(rent?: number | null): string {
-  if (!rent) return '8,500';
-  return rent.toLocaleString('en-IN');
-}
-
-function PgCard({ pg }: { pg: PgListing }) {
-  const style = genderStyles[pg.gender] ?? genderStyles.Coliving;
-
-  return (
-    <div className="group relative flex flex-col overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm transition-all duration-300 hover:shadow-xl hover:-translate-y-1">
-      {/* Image */}
-      <div className="relative h-44 overflow-hidden">
-        <img
-          src={pg.image_url ?? ''}
-          alt={pg.name}
-          className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
-          loading="lazy"
-        />
-        <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent" />
-        <div className="absolute top-3 left-3">
-          <span className={`inline-flex items-center gap-1 rounded-full border px-3 py-1 text-xs font-semibold ${style.bg} ${style.text} ${style.border} backdrop-blur-sm`}>
-            {pg.gender === 'Ladies' ? <Heart className="h-3 w-3" /> : pg.gender === 'Gents' ? <Users className="h-3 w-3" /> : <Home className="h-3 w-3" />}
-            {style.label}
-          </span>
-        </div>
-        <div className="absolute top-3 right-3 flex items-center gap-1 rounded-full bg-white/95 px-2.5 py-1 text-xs font-bold text-amber-600 shadow-sm backdrop-blur-sm">
-          <Star className="h-3.5 w-3.5 fill-amber-500 text-amber-500" />
-          {Number(pg.rating).toFixed(1)}
-        </div>
-      </div>
-
-      {/* Content */}
-      <div className="flex flex-1 flex-col p-4">
-        <h3 className="text-base font-bold text-slate-900">{pg.name}</h3>
-
-        <div className="mt-1.5 flex items-center justify-between text-xs text-slate-500">
-          <div className="flex items-center gap-1">
-            <Navigation className="h-3.5 w-3.5 text-teal-600" />
-            <span>{Number(pg.distance_km).toFixed(1)} km from campus</span>
-          </div>
-          {pg.area && (
-            <div className="flex items-center gap-1 font-medium text-slate-600">
-              <MapPin className="h-3 w-3 text-slate-400" />
-              <span className="max-w-[110px] truncate">{pg.area}</span>
-            </div>
-          )}
-        </div>
-
-        {/* Amenities */}
-        <div className="mt-3 flex flex-wrap gap-1.5">
-          {(pg.amenities || []).slice(0, 5).map((amenity) => {
-            const Icon = getAmenityIcon(amenity);
-            return (
-              <span key={amenity} className="inline-flex items-center gap-1 rounded-lg bg-slate-50 px-2 py-1 text-[10px] font-medium text-slate-600">
-                <Icon className="h-3 w-3 text-slate-400" />
-                {amenity}
-              </span>
-            );
-          })}
-          {(pg.amenities || []).length > 5 && (
-            <span className="inline-flex items-center rounded-lg bg-slate-50 px-2 py-1 text-[10px] font-medium text-slate-500">
-              +{(pg.amenities || []).length - 5} more
-            </span>
-          )}
-        </div>
-
-        {/* Footer */}
-        <div className="mt-auto flex items-end justify-between pt-4">
-          <div>
-            <div className="flex items-baseline gap-0.5">
-              <IndianRupee className="h-4 w-4 text-slate-700" />
-              <span className="text-xl font-extrabold text-slate-900">{formatRent(pg.rent)}</span>
-            </div>
-            <p className="text-[11px] text-slate-400">per month</p>
-          </div>
-          <button className="rounded-xl bg-teal-600 px-4 py-2 text-xs font-semibold text-white shadow-sm transition-all duration-200 hover:bg-teal-700 hover:shadow-md active:scale-95">
-            View Details
-          </button>
-        </div>
-      </div>
-    </div>
-  );
-}
 
 function CollegeSearchBar({
   colleges,
@@ -161,7 +21,7 @@ function CollegeSearchBar({
 }: {
   colleges: College[];
   selectedCollege: College | null;
-  onSelect: (college: College) => void;
+  onSelect: (college: College | null) => void;
 }) {
   const [query, setQuery] = useState('');
   const [isOpen, setIsOpen] = useState(false);
@@ -201,7 +61,7 @@ function CollegeSearchBar({
     } else if (e.key === 'ArrowUp') {
       e.preventDefault();
       setHighlightIndex((prev) => Math.max(prev - 1, 0));
-    } else if (e.key === 'Enter' && highlightIndex >= 0) {
+    } else if (e.key === 'Enter' && highlightIndex >= 0 && filtered[highlightIndex]) {
       e.preventDefault();
       handleSelect(filtered[highlightIndex]);
     } else if (e.key === 'Escape') {
@@ -212,7 +72,7 @@ function CollegeSearchBar({
   return (
     <div ref={containerRef} className="relative w-full">
       <div className="relative">
-        <Search className="absolute left-4 top-1/2 h-5 w-5 -translate-y-1/2 text-slate-400" />
+        <Search className="absolute left-4 top-1/2 h-5 w-5 -translate-y-1/2 text-purple-400/80 transition-colors" />
         <input
           type="text"
           value={query}
@@ -223,13 +83,14 @@ function CollegeSearchBar({
           }}
           onFocus={() => setIsOpen(true)}
           onKeyDown={handleKeyDown}
-          placeholder="Search your college in Bangalore..."
-          className="w-full rounded-2xl border border-slate-200 bg-white py-4 pl-12 pr-4 text-sm font-medium text-slate-800 shadow-lg shadow-slate-200/50 outline-none transition-all duration-200 placeholder:text-slate-400 focus:border-teal-500 focus:ring-4 focus:ring-teal-500/10"
+          placeholder="Search among 380+ Bangalore colleges..."
+          className="w-full rounded-2xl border border-purple-500/30 bg-zinc-950/80 py-4 pl-12 pr-11 text-sm font-medium text-white shadow-2xl shadow-purple-950/40 outline-none backdrop-blur-xl transition-all duration-200 placeholder:text-zinc-500 focus:border-purple-400 focus:ring-4 focus:ring-purple-500/20"
         />
         {selectedCollege && !query && (
           <button
-            onClick={() => onSelect(null as unknown as College)}
-            className="absolute right-3 top-1/2 -translate-y-1/2 rounded-full p-1 text-slate-400 hover:bg-slate-100 hover:text-slate-600"
+            onClick={() => onSelect(null)}
+            className="absolute right-3.5 top-1/2 -translate-y-1/2 rounded-full p-1 text-zinc-400 transition-colors hover:bg-zinc-800 hover:text-white"
+            title="Clear selection"
           >
             <X className="h-4 w-4" />
           </button>
@@ -237,118 +98,44 @@ function CollegeSearchBar({
       </div>
 
       {isOpen && filtered.length > 0 && (
-        <div className="absolute z-20 mt-2 max-h-80 w-full overflow-y-auto rounded-2xl border border-slate-200 bg-white py-2 shadow-xl shadow-slate-300/40">
-          <div className="px-4 py-1.5 text-[11px] font-semibold uppercase tracking-wider text-slate-400 border-b border-slate-100">
-            {filtered.length} {filtered.length === 1 ? 'College' : 'Colleges'} Found
+        <div className="absolute z-30 mt-2 max-h-80 w-full overflow-y-auto rounded-2xl border border-purple-500/30 bg-zinc-950/95 py-2 shadow-2xl shadow-black/80 backdrop-blur-2xl scrollbar-thin">
+          <div className="flex items-center justify-between border-b border-purple-950/60 px-4 py-2 text-[11px] font-semibold uppercase tracking-wider text-purple-300/80">
+            <span>{filtered.length} {filtered.length === 1 ? 'College' : 'Colleges'} Found</span>
+            <span className="text-[10px] normal-case text-zinc-500">Bangalore Hubs</span>
           </div>
           {filtered.slice(0, 50).map((college, idx) => (
             <button
               key={college.id}
               onClick={() => handleSelect(college)}
-              className={`flex w-full items-center gap-3 px-4 py-2.5 text-left transition-colors ${idx === highlightIndex ? 'bg-teal-50' : 'hover:bg-slate-50'
-                }`}
+              className={`flex w-full items-center gap-3 px-4 py-2.5 text-left transition-colors ${
+                idx === highlightIndex
+                  ? 'bg-purple-900/40 text-white'
+                  : 'text-zinc-200 hover:bg-purple-950/50 hover:text-white'
+              }`}
             >
-              <div className="flex h-9 w-9 flex-shrink-0 items-center justify-center rounded-xl bg-teal-50">
-                <MapPin className="h-4 w-4 text-teal-600" />
+              <div className="flex h-9 w-9 flex-shrink-0 items-center justify-center rounded-xl border border-purple-800/40 bg-purple-950/70 text-purple-300">
+                <MapPin className="h-4 w-4" />
               </div>
               <div className="min-w-0 flex-1">
-                <p className="truncate text-sm font-semibold text-slate-800">{college.name}</p>
-                <p className="truncate text-xs text-slate-400">{college.area}</p>
+                <p className="truncate text-sm font-semibold text-white">{college.name}</p>
+                <p className="truncate text-xs text-purple-300/70">{college.area}</p>
               </div>
               {selectedCollege?.id === college.id && (
-                <CheckCircle2 className="h-4 w-4 flex-shrink-0 text-teal-600" />
+                <CheckCircle2 className="h-4 w-4 flex-shrink-0 text-purple-400" />
               )}
             </button>
           ))}
           {filtered.length > 50 && (
-            <div className="border-t border-slate-100 px-4 py-2.5 text-center text-xs font-medium text-slate-500 bg-slate-50/70">
-              Showing top 50 of {filtered.length} colleges — type to search specifically
+            <div className="border-t border-purple-950/60 bg-zinc-900/50 px-4 py-2.5 text-center text-xs font-medium text-zinc-400">
+              Showing top 50 of {filtered.length} colleges — type to narrow down results
             </div>
           )}
         </div>
       )}
 
       {isOpen && filtered.length === 0 && query && (
-        <div className="absolute z-20 mt-2 w-full rounded-2xl border border-slate-200 bg-white py-6 text-center shadow-xl">
-          <p className="text-sm text-slate-500">No colleges found for "{query}"</p>
-        </div>
-      )}
-    </div>
-  );
-}
-
-function FilterPill({
-  active,
-  onClick,
-  children,
-}: {
-  active: boolean;
-  onClick: () => void;
-  children: React.ReactNode;
-}) {
-  return (
-    <button
-      onClick={onClick}
-      className={`inline-flex items-center gap-1.5 whitespace-nowrap rounded-full border px-4 py-2 text-sm font-semibold transition-all duration-200 active:scale-95 ${active
-          ? 'border-teal-600 bg-teal-600 text-white shadow-sm shadow-teal-600/20'
-          : 'border-slate-200 bg-white text-slate-600 hover:border-slate-300 hover:bg-slate-50'
-        }`}
-    >
-      {children}
-    </button>
-  );
-}
-
-function SortDropdown({
-  sortBy,
-  onChange,
-}: {
-  sortBy: SortBy;
-  onChange: (s: SortBy) => void;
-}) {
-  const [isOpen, setIsOpen] = useState(false);
-  const ref = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    function handleClick(e: MouseEvent) {
-      if (ref.current && !ref.current.contains(e.target as Node)) setIsOpen(false);
-    }
-    document.addEventListener('mousedown', handleClick);
-    return () => document.removeEventListener('mousedown', handleClick);
-  }, []);
-
-  const labels: Record<SortBy, string> = {
-    distance: 'Nearest',
-    'rent-low': 'Rent: Low to High',
-    'rent-high': 'Rent: High to Low',
-    rating: 'Top Rated',
-  };
-
-  return (
-    <div ref={ref} className="relative">
-      <button
-        onClick={() => setIsOpen(!isOpen)}
-        className="inline-flex items-center gap-2 rounded-xl border border-slate-200 bg-white px-4 py-2 text-sm font-semibold text-slate-600 transition-colors hover:bg-slate-50"
-      >
-        <TrendingUp className="h-4 w-4 text-slate-400" />
-        {labels[sortBy]}
-      </button>
-      {isOpen && (
-        <div className="absolute right-0 z-20 mt-2 w-48 overflow-hidden rounded-xl border border-slate-200 bg-white py-1 shadow-xl">
-          {(Object.keys(labels) as SortBy[]).map((key) => (
-            <button
-              key={key}
-              onClick={() => {
-                onChange(key);
-                setIsOpen(false);
-              }}
-              className={`flex w-full items-center justify-between px-4 py-2 text-sm transition-colors ${sortBy === key ? 'bg-teal-50 font-semibold text-teal-700' : 'text-slate-600 hover:bg-slate-50'
-                }`}
-            >
-              {labels[key]}
-              {sortBy === key && <CheckCircle2 className="h-4 w-4" />}
-            </button>
-          ))}
+        <div className="absolute z-30 mt-2 w-full rounded-2xl border border-purple-500/30 bg-zinc-950/95 py-6 text-center shadow-2xl backdrop-blur-2xl">
+          <p className="text-sm text-zinc-400">No colleges found matching "{query}"</p>
         </div>
       )}
     </div>
@@ -357,27 +144,11 @@ function SortDropdown({
 
 function App() {
   const [colleges, setColleges] = useState<College[]>([]);
-  const [pgs, setPgs] = useState<PgListing[]>([]);
   const [selectedCollege, setSelectedCollege] = useState<College | null>(null);
-  const [genderFilter, setGenderFilter] = useState<GenderFilter>('All');
-  const [sortBy, setSortBy] = useState<SortBy>('distance');
   const [loadingColleges, setLoadingColleges] = useState(true);
-  const [loadingPgs, setLoadingPgs] = useState(false);
-  const [error, setError] = useState<string | null>(null);
-  const [isAddModalOpen, setIsAddModalOpen] = useState(false);
-  const [toastMessage, setToastMessage] = useState<string | null>(null);
   const [dbStatus, setDbStatus] = useState<'connected' | 'unconfigured' | 'error'>('unconfigured');
-  const [dbError, setDbError] = useState<string | null>(null);
 
-  function handlePgAdded(newListing: PgListing) {
-    setPgs((prev) => [newListing, ...prev]);
-    setToastMessage(`"${newListing.name}" has been listed successfully!`);
-    setTimeout(() => {
-      setToastMessage(null);
-    }, 5000);
-  }
-
-  // Fetch all colleges once on mount
+  // Fetch all colleges on mount
   useEffect(() => {
     async function loadColleges() {
       try {
@@ -388,28 +159,15 @@ function App() {
             .select('*')
             .order('name')
             .limit(1000);
-          if (err) {
-            console.error('Error fetching colleges from Supabase:', err);
-            setDbStatus('error');
-            setDbError(err.message);
-          } else if (data && data.length > 0) {
+          if (!err && data && data.length > 0) {
             setColleges(data as College[]);
             setDbStatus('connected');
-            setDbError(null);
             return;
-          } else {
-            setDbStatus('error');
-            setDbError('Supabase returned 0 rows. Please verify Row Level Security (RLS) on public.colleges allows SELECT.');
           }
-        } else {
-          setDbStatus('unconfigured');
         }
-        // Fallback to Bangalore colleges
         setColleges(DEFAULT_COLLEGES);
       } catch (err) {
         console.warn('Supabase college fetch fallback:', err);
-        setDbStatus('error');
-        setDbError(err instanceof Error ? err.message : 'Unknown database error');
         setColleges(DEFAULT_COLLEGES);
       } finally {
         setLoadingColleges(false);
@@ -418,333 +176,184 @@ function App() {
     loadColleges();
   }, []);
 
-  // Fetch PGs from Supabase (by selected college or featured by default)
-  useEffect(() => {
-    async function loadPgs() {
-      try {
-        setLoadingPgs(true);
-        setError(null);
-        if (isSupabaseConfigured) {
-          let query = supabase.from('pgs').select('*');
-          if (selectedCollege) {
-            query = query.eq('college_id', selectedCollege.id);
-          } else {
-            // If no college is selected yet, show featured Bangalore PGs!
-            query = query.limit(20);
-          }
-          const { data, error: err } = await query;
-          if (!err && data && data.length > 0) {
-            setPgs(data as PgListing[]);
-            return;
-          }
-        }
-        // Fallback to rich mock PGs for the selected college
-        setPgs(getMockPgsForCollege(selectedCollege));
-      } catch (err) {
-        console.warn('Supabase PG fetch fallback:', err);
-        setPgs(getMockPgsForCollege(selectedCollege));
-      } finally {
-        setLoadingPgs(false);
-      }
-    }
-    loadPgs();
-  }, [selectedCollege]);
-
-  // Reset gender filter when college changes
-  useEffect(() => {
-    setGenderFilter('All');
-  }, [selectedCollege]);
-
-  const filteredPgs = useMemo(() => {
-    let result = [...pgs];
-
-    if (genderFilter !== 'All') {
-      result = result.filter((pg) => pg.gender === genderFilter);
-    }
-
-    result.sort((a, b) => {
-      switch (sortBy) {
-        case 'rent-low':
-          return a.rent - b.rent;
-        case 'rent-high':
-          return b.rent - a.rent;
-        case 'rating':
-          return b.rating - a.rating;
-        case 'distance':
-        default:
-          return a.distance_km - b.distance_km;
-      }
-    });
-
-    return result;
-  }, [pgs, genderFilter, sortBy]);
-
-  const genderCounts = useMemo(() => {
-    return {
-      All: pgs.length,
-      Ladies: pgs.filter((pg) => pg.gender === 'Ladies').length,
-      Gents: pgs.filter((pg) => pg.gender === 'Gents').length,
-      Coliving: pgs.filter((pg) => pg.gender === 'Coliving').length,
-    };
-  }, [pgs]);
-
   return (
-    <div className="min-h-screen bg-slate-50">
-      {/* Header */}
-      <header className="sticky top-0 z-30 border-b border-slate-200 bg-white/80 backdrop-blur-lg">
-        <div className="mx-auto flex max-w-7xl items-center justify-between px-4 py-3 sm:px-6">
-          <div className="flex items-center gap-2.5">
-            <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-teal-600 shadow-sm shadow-teal-600/20">
-              <Home className="h-5 w-5 text-white" />
-            </div>
-            <div>
-              <h1 className="text-lg font-extrabold tracking-tight text-teal-700">SKOLAR</h1>
-              <p className="hidden text-[11px] text-slate-400 sm:block">Bangalore Student Housing</p>
-            </div>
-          </div>
-          <div className="flex items-center gap-3">
-            <div className="hidden sm:flex items-center gap-1.5 text-xs font-medium text-slate-500">
-              <MapPin className="h-4 w-4 text-teal-600" />
-              <span>Bengaluru</span>
-            </div>
-            {dbStatus === 'connected' ? (
-              <span className="hidden sm:inline-flex items-center gap-1.5 rounded-full bg-emerald-50 px-3 py-1 text-xs font-semibold text-emerald-700 border border-emerald-200">
-                <span className="h-2 w-2 rounded-full bg-emerald-500 animate-pulse" />
-                Supabase Live ({colleges.length} colleges)
-              </span>
-            ) : (
-              <span className="hidden sm:inline-flex items-center gap-1.5 rounded-full bg-teal-50 px-3 py-1 text-xs font-semibold text-teal-700 border border-teal-200" title="All 380+ Bangalore colleges loaded">
-                <span className="h-2 w-2 rounded-full bg-teal-600" />
-                {colleges.length} Colleges Available
-              </span>
-            )}
-            <button
-              onClick={() => setIsAddModalOpen(true)}
-              className="inline-flex items-center gap-1.5 rounded-xl bg-teal-600 px-3.5 py-2 text-xs font-bold text-white shadow-sm shadow-teal-600/20 transition-all hover:bg-teal-700 hover:shadow-md active:scale-95"
-            >
-              <Plus className="h-4 w-4" />
-              <span>List a PG</span>
-            </button>
-          </div>
-        </div>
-      </header>
+    <div className="relative min-h-screen w-full overflow-x-hidden bg-black text-white font-sans selection:bg-purple-500 selection:text-white">
+      {/* Full-Page Fixed MicroSlats Background */}
+      <div className="fixed inset-0 h-full w-full pointer-events-none z-0">
+        <MicroSlats
+          preset="swell"
+          color="#A855F7"
+          glintColor="#ffffff"
+          backgroundColor="#000000"
+          slatWidth={10}
+          slatHeight={25}
+          gap={3}
+          roundness={0.75}
+          interactive
+          cursorStrength={1}
+          cursorSize={40}
+          swirl={0}
+          trail={1.4}
+          lean={0}
+          intro
+        />
+      </div>
 
-      {/* Success Toast */}
-      {toastMessage && (
-        <div className="fixed bottom-6 right-6 z-50 flex items-center gap-2.5 rounded-2xl border border-teal-200 bg-teal-900 px-4 py-3 text-xs font-semibold text-white shadow-2xl animate-in slide-in-from-bottom-5">
-          <CheckCircle className="h-4 w-4 text-teal-300" />
-          <span>{toastMessage}</span>
-          <button
-            onClick={() => setToastMessage(null)}
-            className="ml-2 rounded p-1 text-teal-300 hover:bg-teal-800"
-          >
-            <X className="h-3 w-3" />
-          </button>
-        </div>
-      )}
+      {/* Global Ambient Dark Gradient Overlay */}
+      <div className="fixed inset-0 bg-gradient-to-b from-black/60 via-black/30 to-black/80 pointer-events-none z-0" />
 
-      {/* Hero */}
-      {/* Hero with MicroSlats Interactive Background */}
-      <section className="relative overflow-hidden bg-black" style={{ width: '100%', minHeight: '600px', position: 'relative' }}>
-        {/* MicroSlats Background */}
-        <div style={{ width: '100%', height: '100%', position: 'absolute', inset: 0 }}>
-          <MicroSlats
-            preset="swell"
-            color="#A855F7"
-            glintColor="#ffffff"
-            backgroundColor="#000000"
-            slatWidth={10}
-            slatHeight={25}
-            gap={3}
-            roundness={0.75}
-            interactive
-            cursorStrength={1}
-            cursorSize={40}
-            swirl={0}
-            trail={1.4}
-            lean={0}
-            intro
-          />
-        </div>
-
-        {/* Ambient Gradient Overlay for Readability */}
-        <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/35 to-black/85 pointer-events-none" />
-
-        <div className="relative z-10 mx-auto max-w-3xl px-4 py-16 text-center sm:px-6 sm:py-24">
-          <span className="inline-flex items-center gap-1.5 rounded-full bg-purple-500/20 border border-purple-400/30 px-3.5 py-1 text-xs font-semibold text-purple-200 backdrop-blur-md shadow-lg shadow-purple-900/30">
-            <Sparkles className="h-3.5 w-3.5 text-purple-300" />
-            Find your perfect stay near campus
-          </span>
-          <h2 className="mt-5 text-3xl font-extrabold leading-tight tracking-tight text-white sm:text-5xl">
-            Find PGs near your<br className="hidden sm:block" /> college in Bangalore
-          </h2>
-          <p className="mx-auto mt-4 max-w-xl text-sm text-purple-100/80 sm:text-base">
-            {loadingColleges
-              ? 'Loading colleges...'
-              : `Search from ${colleges.length} colleges and discover verified PGs with rent, ratings, amenities, and distance — all in one place.`}
-          </p>
-
-          {/* Search Bar */}
-          <div className="mx-auto mt-8 max-w-2xl">
-            <CollegeSearchBar
-              colleges={colleges}
-              selectedCollege={selectedCollege}
-              onSelect={setSelectedCollege}
-            />
-
-            {/* College Status Indicator */}
-            {dbStatus === 'connected' ? (
-              <div className="mt-3.5 flex items-center justify-center gap-2 text-xs text-purple-200">
-                <span className="h-2 w-2 rounded-full bg-emerald-400 animate-pulse" />
-                <span>Connected to Supabase live database ({colleges.length} colleges loaded)</span>
-              </div>
-            ) : (
-              <div className="mt-3.5 flex items-center justify-center gap-2 text-xs text-purple-200/90">
-                <span className="h-2 w-2 rounded-full bg-emerald-400" />
-                <span><strong>{colleges.length} Bangalore colleges</strong> available across Engineering, Medical, Arts & Commerce</span>
-              </div>
-            )}
-          </div>
-
-          {/* Popular Colleges Quick Selection */}
-          {colleges.length > 0 && !selectedCollege && (
-            <div className="mt-5 flex flex-wrap items-center justify-center gap-2 text-xs">
-              <span className="text-purple-300 font-medium">Popular:</span>
-              {colleges
-                .filter((c) => c.name && c.name.trim().length > 3)
-                .slice(0, 4)
-                .map((college) => (
-                  <button
-                    key={college.id}
-                    onClick={() => setSelectedCollege(college)}
-                    className="rounded-full bg-white/10 border border-white/15 px-3 py-1 text-xs text-white backdrop-blur-md transition-all hover:bg-white/25 hover:border-white/30"
-                  >
-                    {college.name.split('(')[0].trim()}
-                  </button>
-                ))}
-            </div>
-          )}
-        </div>
-      </section>
-
-      {/* Main Content */}
-      <main className="mx-auto max-w-7xl px-4 py-8 sm:px-6">
-        {/* Selected College Banner */}
-        {selectedCollege && (
-          <div className="mb-6 flex items-center justify-between rounded-2xl border border-teal-100 bg-teal-50 px-5 py-4">
+      {/* Foreground Content */}
+      <div className="relative z-10 flex min-h-screen flex-col">
+        {/* Header */}
+        <header className="sticky top-0 z-40 border-b border-purple-900/30 bg-black/60 backdrop-blur-xl">
+          <div className="mx-auto flex max-w-7xl items-center justify-between px-4 py-3 sm:px-6">
             <div className="flex items-center gap-3">
-              <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-teal-600">
-                <MapPin className="h-5 w-5 text-white" />
+              <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-gradient-to-tr from-purple-700 to-fuchsia-600 shadow-lg shadow-purple-600/30">
+                <Home className="h-5 w-5 text-white" />
               </div>
               <div>
-                <p className="text-sm font-bold text-slate-900">{selectedCollege.name}</p>
-                <p className="text-xs text-slate-500">{selectedCollege.area}</p>
+                <h1 className="text-xl font-black tracking-tight text-white drop-shadow-[0_0_12px_rgba(168,85,247,0.6)]">
+                  SKOLAR
+                </h1>
+                <p className="hidden text-[11px] font-medium text-purple-300/70 sm:block">
+                  Bangalore Student Living
+                </p>
               </div>
             </div>
-            <button
-              onClick={() => setSelectedCollege(null)}
-              className="inline-flex items-center gap-1 rounded-lg bg-white px-3 py-1.5 text-xs font-semibold text-slate-600 transition-colors hover:bg-slate-100"
-            >
-              <X className="h-3.5 w-3.5" />
-              Clear
-            </button>
-          </div>
-        )}
 
-        {/* Filters Bar */}
-        <div className="mb-6 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
-          <div className="flex items-center gap-2 overflow-x-auto pb-1">
-            <FilterPill active={genderFilter === 'All'} onClick={() => setGenderFilter('All')}>
-              All <span className="text-[10px] opacity-70">({genderCounts.All})</span>
-            </FilterPill>
-            <FilterPill active={genderFilter === 'Ladies'} onClick={() => setGenderFilter('Ladies')}>
-              <Heart className="h-3.5 w-3.5" />
-              Ladies <span className="text-[10px] opacity-70">({genderCounts.Ladies})</span>
-            </FilterPill>
-            <FilterPill active={genderFilter === 'Gents'} onClick={() => setGenderFilter('Gents')}>
-              <Users className="h-3.5 w-3.5" />
-              Gents <span className="text-[10px] opacity-70">({genderCounts.Gents})</span>
-            </FilterPill>
-            <FilterPill active={genderFilter === 'Coliving'} onClick={() => setGenderFilter('Coliving')}>
-              <Home className="h-3.5 w-3.5" />
-              Coliving <span className="text-[10px] opacity-70">({genderCounts.Coliving})</span>
-            </FilterPill>
-          </div>
-          <SortDropdown sortBy={sortBy} onChange={setSortBy} />
-        </div>
+            <div className="flex items-center gap-3">
+              <div className="hidden sm:flex items-center gap-1.5 rounded-full border border-purple-800/40 bg-purple-950/60 px-3 py-1 text-xs font-medium text-purple-300">
+                <MapPin className="h-3.5 w-3.5 text-purple-400" />
+                <span>Bengaluru</span>
+              </div>
 
-        {/* Results */}
-        {loadingPgs ? (
-          <div className="flex flex-col items-center justify-center py-24">
-            <div className="h-10 w-10 animate-spin rounded-full border-4 border-slate-200 border-t-teal-600" />
-            <p className="mt-4 text-sm text-slate-500">Loading PGs...</p>
-          </div>
-        ) : error ? (
-          <div className="flex flex-col items-center justify-center rounded-2xl border border-rose-200 bg-rose-50 py-16">
-            <p className="text-sm font-semibold text-rose-700">Something went wrong</p>
-            <p className="mt-1 text-xs text-rose-500">{error}</p>
-          </div>
-        ) : filteredPgs.length === 0 ? (
-          <div className="flex flex-col items-center justify-center py-24 text-center">
-            <div className="flex h-16 w-16 items-center justify-center rounded-2xl bg-slate-100">
-              <Search className="h-8 w-8 text-slate-300" />
-            </div>
-            <p className="mt-4 text-base font-semibold text-slate-700">No PGs found</p>
-            <p className="mt-1 text-sm text-slate-400">
-              {selectedCollege
-                ? `No PGs match your filters near ${selectedCollege.name}.`
-                : 'Select a college or adjust your filters to see results.'}
-            </p>
-          </div>
-        ) : (
-          <>
-            <div className="mb-4 flex items-center justify-between">
-              <p className="text-sm text-slate-500">
-                Showing <span className="font-bold text-slate-700">{filteredPgs.length}</span>{' '}
-                {filteredPgs.length === 1 ? 'PG' : 'PGs'}
-                {selectedCollege ? (
-                  <> near <span className="font-semibold text-slate-700">{selectedCollege.name}</span></>
-                ) : (
-                  <> in <span className="font-semibold text-slate-700">Bangalore (Featured)</span></>
-                )}
-              </p>
-              {!selectedCollege && (
-                <span className="rounded-full bg-teal-50 px-3 py-1 text-xs font-semibold text-teal-700">
-                  Featured Listings
+              {dbStatus === 'connected' ? (
+                <span className="hidden sm:inline-flex items-center gap-1.5 rounded-full border border-emerald-500/40 bg-emerald-950/60 px-3 py-1 text-xs font-semibold text-emerald-300 shadow-sm">
+                  <span className="h-2 w-2 rounded-full bg-emerald-400 animate-pulse" />
+                  Supabase Live ({colleges.length} colleges)
+                </span>
+              ) : (
+                <span className="hidden sm:inline-flex items-center gap-1.5 rounded-full border border-purple-500/30 bg-purple-950/60 px-3 py-1 text-xs font-semibold text-purple-300 shadow-sm">
+                  <span className="h-2 w-2 rounded-full bg-purple-400" />
+                  {colleges.length} Colleges Available
                 </span>
               )}
             </div>
-            <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-              {filteredPgs.map((pg) => (
-                <PgCard key={pg.id} pg={pg} />
-              ))}
-            </div>
-          </>
-        )}
-      </main>
+          </div>
+        </header>
 
-      {/* Footer */}
-      <footer className="border-t border-slate-200 bg-white">
-        <div className="mx-auto max-w-7xl px-4 py-8 sm:px-6">
-          <div className="flex flex-col items-center justify-between gap-4 sm:flex-row">
-            <div className="flex items-center gap-2">
-              <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-teal-600">
-                <Home className="h-4 w-4 text-white" />
-              </div>
-              <span className="text-sm font-extrabold tracking-wide text-teal-700">SKOLAR</span>
+        {/* Hero Section */}
+        <main className="flex flex-1 flex-col items-center justify-center px-4 py-16 text-center sm:px-6 sm:py-24">
+          <div className="mx-auto w-full max-w-3xl">
+            {/* Sparkles pill */}
+            <div className="inline-flex items-center gap-2 rounded-full border border-purple-400/30 bg-purple-500/10 px-4 py-1.5 text-xs font-semibold text-purple-200 shadow-[0_0_20px_rgba(168,85,247,0.25)] backdrop-blur-md">
+              <Sparkles className="h-3.5 w-3.5 text-purple-300 animate-pulse" />
+              <span>Bangalore Campus & Student Living Hub</span>
             </div>
-            <p className="text-xs text-slate-400">
-              Helping students find their home away from home.
+
+            {/* Headline */}
+            <h2 className="mt-6 text-4xl font-extrabold tracking-tight text-white sm:text-6xl sm:leading-[1.1]">
+              Find your college in <br className="hidden sm:block" />
+              <span className="bg-gradient-to-r from-purple-400 via-fuchsia-300 to-purple-200 bg-clip-text text-transparent">
+                Bangalore
+              </span>
+            </h2>
+
+            <p className="mx-auto mt-5 max-w-xl text-sm font-normal text-zinc-400 sm:text-base leading-relaxed">
+              {loadingColleges
+                ? 'Loading colleges across Bangalore...'
+                : `Instant directory across ${colleges.length} colleges with verified campuses, neighborhood hubs, and housing proximity.`}
+            </p>
+
+            {/* College Search Bar */}
+            <div className="mx-auto mt-8 max-w-2xl">
+              <CollegeSearchBar
+                colleges={colleges}
+                selectedCollege={selectedCollege}
+                onSelect={setSelectedCollege}
+              />
+
+              {/* Status note */}
+              <div className="mt-3.5 flex items-center justify-center gap-2 text-xs text-purple-300/80">
+                <span className="h-2 w-2 rounded-full bg-purple-400" />
+                <span>
+                  <strong>{colleges.length} Bangalore colleges</strong> available across Engineering, Medical, Arts & Commerce
+                </span>
+              </div>
+            </div>
+
+            {/* Selected College Detail Card */}
+            {selectedCollege && (
+              <div className="mx-auto mt-8 max-w-2xl overflow-hidden rounded-3xl border border-purple-500/40 bg-zinc-950/80 p-6 text-left shadow-[0_0_40px_rgba(168,85,247,0.18)] backdrop-blur-2xl transition-all">
+                <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+                  <div className="flex items-start gap-4">
+                    <div className="flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-2xl border border-purple-500/40 bg-gradient-to-tr from-purple-900/80 to-purple-700/50 text-purple-300 shadow-md">
+                      <Building2 className="h-6 w-6" />
+                    </div>
+                    <div>
+                      <span className="inline-flex items-center gap-1 rounded-full border border-purple-500/30 bg-purple-950/60 px-2.5 py-0.5 text-[11px] font-semibold text-purple-300">
+                        <MapPin className="h-3 w-3" />
+                        {selectedCollege.area || 'Bangalore'}
+                      </span>
+                      <h3 className="mt-1.5 text-lg font-bold text-white sm:text-xl">
+                        {selectedCollege.name}
+                      </h3>
+                      {selectedCollege.lat && selectedCollege.lng && (
+                        <p className="mt-1 flex items-center gap-1 text-xs text-zinc-500">
+                          <Compass className="h-3 w-3 text-purple-400" />
+                          GPS: {selectedCollege.lat.toFixed(4)}, {selectedCollege.lng.toFixed(4)}
+                        </p>
+                      )}
+                    </div>
+                  </div>
+
+                  <button
+                    onClick={() => setSelectedCollege(null)}
+                    className="inline-flex items-center gap-1.5 self-start rounded-xl border border-purple-500/30 bg-purple-950/40 px-3.5 py-2 text-xs font-semibold text-purple-300 transition-all hover:bg-purple-900/60 hover:text-white sm:self-center"
+                  >
+                    <X className="h-3.5 w-3.5" />
+                    Clear Selection
+                  </button>
+                </div>
+              </div>
+            )}
+
+            {/* Popular Colleges Chips */}
+            {!selectedCollege && colleges.length > 0 && (
+              <div className="mt-7 flex flex-wrap items-center justify-center gap-2 text-xs">
+                <span className="font-semibold text-purple-400">Popular:</span>
+                {colleges
+                  .filter((c) => c.name && c.name.trim().length > 3)
+                  .slice(0, 6)
+                  .map((college) => (
+                    <button
+                      key={college.id}
+                      onClick={() => setSelectedCollege(college)}
+                      className="rounded-full border border-purple-500/20 bg-zinc-900/70 px-3.5 py-1.5 text-xs text-zinc-300 backdrop-blur-md transition-all hover:border-purple-400/60 hover:bg-purple-950/70 hover:text-white hover:shadow-[0_0_15px_rgba(168,85,247,0.3)]"
+                    >
+                      {college.name.split('(')[0].trim()}
+                    </button>
+                  ))}
+              </div>
+            )}
+          </div>
+        </main>
+
+        {/* Footer */}
+        <footer className="border-t border-purple-950/40 bg-black/70 backdrop-blur-xl">
+          <div className="mx-auto flex max-w-7xl flex-col items-center justify-between gap-4 px-4 py-6 text-xs text-zinc-500 sm:flex-row sm:px-6">
+            <div className="flex items-center gap-2">
+              <div className="flex h-6 w-6 items-center justify-center rounded-lg bg-purple-900/60 text-purple-300">
+                <Home className="h-3.5 w-3.5" />
+              </div>
+              <span className="font-bold text-zinc-300">SKOLAR Bengaluru</span>
+            </div>
+            <p className="text-zinc-500">
+              Connecting students across 380+ Bangalore colleges.
             </p>
           </div>
-        </div>
-      </footer>
-      {/* Add PG Modal */}
-      <AddPgModal
-        isOpen={isAddModalOpen}
-        onClose={() => setIsAddModalOpen(false)}
-        onPgAdded={handlePgAdded}
-      />
+        </footer>
+      </div>
     </div>
   );
 }

@@ -19,6 +19,7 @@ export interface PgListing {
   area?: string | null;
   college_name?: string | null;
   google_url?: string;
+  google_search_url?: string;
   reviews_count?: number;
   sharing?: string[];
   deposit?: number;

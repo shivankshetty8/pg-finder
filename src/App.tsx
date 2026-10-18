@@ -327,12 +327,18 @@ function PgCard({ pg, college }: { pg: PgListing; college: College }) {
         <SwipeToRedirect
           url={
             pg.google_url ||
+            `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(
+              pg.name + ', ' + (pg.area || college.area || 'Bangalore') + ', Bengaluru, Karnataka'
+            )}`
+          }
+          searchUrl={
+            pg.google_search_url ||
             `https://www.google.com/search?q=${encodeURIComponent(
-              pg.name + ' near ' + college.name + ' Bangalore PG'
+              pg.name + ' ' + (pg.area || college.area || 'Bangalore') + ' Bangalore'
             )}`
           }
           pgName={pg.name}
-          label="Swipe to View on Google"
+          label="Slide to Open Google Place & Share"
         />
       </div>
     </div>

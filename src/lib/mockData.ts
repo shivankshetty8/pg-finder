@@ -3396,6 +3396,337 @@ const AUTHENTIC_BANGALORE_PGS: Record<
       sharing: ['Double', 'Triple'],
     },
   ],
+
+  // Mallathahalli / Dr. AIT (Dr. Ambedkar Institute of Technology)
+  'Mallathahalli': [
+    {
+      name: 'Sai Arya PG for Ladies',
+      gender: 'Ladies',
+      rent: 7500,
+      rating: 4.6,
+      distance: 0.4,
+      amenities: [
+        '3 North & South Meals',
+        'High-Speed WiFi',
+        '24/7 CCTV & Security Guard',
+        'Attached Washroom & Balcony',
+        'Hot Water Geyser',
+        'RO Purified Water',
+        'Washing Machine',
+      ],
+      sharing: ['Single', 'Double', 'Triple'],
+    },
+    {
+      name: 'Gowthamyashree PG for Men',
+      gender: 'Gents',
+      rent: 6500,
+      rating: 4.3,
+      distance: 0.5,
+      amenities: [
+        '3 Times Hygienic Food',
+        'High-Speed WiFi',
+        'Two-Wheeler Dedicated Parking',
+        'Washing Machine',
+        'Hot Water 24/7',
+        'Power Backup',
+        'Daily Cleaning',
+      ],
+      sharing: ['Double', 'Triple'],
+    },
+    {
+      name: 'Shri Balaji Luxury Girls PG',
+      gender: 'Ladies',
+      rent: 8000,
+      rating: 4.5,
+      distance: 0.6,
+      amenities: [
+        '3 Meals Included',
+        'High-Speed WiFi',
+        'Biometric Access & Security',
+        'Geyser Hot Water',
+        'RO Purified Drinking Water',
+        'Daily Housekeeping',
+      ],
+      sharing: ['Single', 'Double', 'Triple'],
+    },
+    {
+      name: 'Royal PG Accommodation for Men',
+      gender: 'Gents',
+      rent: 6800,
+      rating: 4.2,
+      distance: 0.5,
+      amenities: [
+        '3 Times Homely Food',
+        'High-Speed WiFi',
+        'CCTV Security',
+        'Hot Water',
+        'Power Backup (Inverter)',
+        'Two-Wheeler Parking',
+      ],
+      sharing: ['Double', 'Triple'],
+    },
+    {
+      name: 'Sri Sai Ashraya PG for Ladies',
+      gender: 'Ladies',
+      rent: 7000,
+      rating: 4.4,
+      distance: 0.5,
+      amenities: [
+        '3 Meals (North & South)',
+        'High-Speed WiFi',
+        '24/7 CCTV & Security',
+        'Hot Water',
+        'Daily Cleaning',
+        'RO Drinking Water',
+      ],
+      sharing: ['Single', 'Double', 'Triple'],
+    },
+  ],
+
+  // Nagarbhavi
+  'Nagarbhavi': [
+    {
+      name: 'Gowthamyashree PG for Men',
+      gender: 'Gents',
+      rent: 6500,
+      rating: 4.3,
+      distance: 0.4,
+      amenities: ['3 Times Food', 'High-Speed WiFi', 'Two-Wheeler Parking', 'Washing Machine', 'Hot Water', 'Power Backup'],
+      sharing: ['Double', 'Triple'],
+    },
+    {
+      name: 'Sai Arya PG for Ladies',
+      gender: 'Ladies',
+      rent: 7500,
+      rating: 4.6,
+      distance: 0.4,
+      amenities: ['3 Meals Included', 'High-Speed WiFi', '24/7 CCTV', 'Hot Water', 'RO Water', 'Washing Machine'],
+      sharing: ['Double', 'Triple'],
+    },
+    {
+      name: 'Shri Balaji Luxury Girls PG',
+      gender: 'Ladies',
+      rent: 8000,
+      rating: 4.5,
+      distance: 0.6,
+      amenities: ['3 North & South Meals', 'High-Speed WiFi', 'Biometric Access', 'Daily Cleaning', 'Power Backup'],
+      sharing: ['Single', 'Double', 'Triple'],
+    },
+    {
+      name: 'Royal PG Accommodation for Men',
+      gender: 'Gents',
+      rent: 6800,
+      rating: 4.2,
+      distance: 0.5,
+      amenities: ['3 Times Hygienic Food', 'High-Speed WiFi', 'Parking', 'Washing Machine', 'Hot Water', 'Power Backup'],
+      sharing: ['Double', 'Triple'],
+    },
+    {
+      name: 'Sri Lakshmivenkateshwara Gents PG',
+      gender: 'Gents',
+      rent: 6200,
+      rating: 4.1,
+      distance: 0.6,
+      amenities: ['3 Meals Included', 'High-Speed WiFi', 'CCTV Security', 'Hot Water', 'Power Backup', 'RO Water'],
+      sharing: ['Double', 'Triple'],
+    },
+  ],
+
+  // Soladevanahalli / Acharya Institutes (AIT)
+  'Soladevanahalli': [
+    {
+      name: 'Havens Stays Boys PG',
+      gender: 'Gents',
+      rent: 7000,
+      rating: 4.6,
+      distance: 0.3,
+      amenities: ['3 Times Food', 'High-Speed WiFi', 'Power Backup', 'CCTV Security', 'Washing Machine', 'Daily Housekeeping'],
+      sharing: ['Single', 'Double', 'Triple'],
+    },
+    {
+      name: 'Jasmine Girls PG',
+      gender: 'Ladies',
+      rent: 7500,
+      rating: 4.5,
+      distance: 0.2,
+      amenities: ['3 Meals (North/South)', 'High-Speed WiFi', '24/7 Security Warden', 'Hot Water', 'RO Water', 'Washing Machine'],
+      sharing: ['Double', 'Triple'],
+    },
+    {
+      name: 'Alpha PG for Students',
+      gender: 'Gents',
+      rent: 6500,
+      rating: 4.3,
+      distance: 0.2,
+      amenities: ['3 Times Hygienic Food', 'High-Speed WiFi', 'Attached Bathroom', 'Hot Water', 'Power Backup', 'Parking'],
+      sharing: ['Single', 'Double', 'Triple'],
+    },
+    {
+      name: 'Royal PG Student Hostel',
+      gender: 'Gents',
+      rent: 6200,
+      rating: 4.2,
+      distance: 0.4,
+      amenities: ['3 Meals Included', 'High-Speed WiFi', 'Two-Wheeler Parking', 'Hot Water', 'Power Backup', 'RO Water'],
+      sharing: ['Double', 'Triple'],
+    },
+    {
+      name: 'AR PG for Men',
+      gender: 'Gents',
+      rent: 6800,
+      rating: 4.3,
+      distance: 0.3,
+      amenities: ['Food Included', 'High-Speed WiFi', 'CCTV Security', 'Hot Water', 'Washing Machine', 'Daily Cleaning'],
+      sharing: ['Double', 'Triple'],
+    },
+  ],
+
+  // Magadi Road / East West Institute of Technology (EWIT)
+  'Magadi Road': [
+    {
+      name: 'Sahana PG for Gents',
+      gender: 'Gents',
+      rent: 6500,
+      rating: 4.3,
+      distance: 0.4,
+      amenities: ['3 Times Food', 'High-Speed WiFi', 'Two-Wheeler Parking', 'Washing Machine', 'Hot Water', 'Power Backup'],
+      sharing: ['Double', 'Triple'],
+    },
+    {
+      name: 'Adhi Nest Luxury Ladies PG',
+      gender: 'Ladies',
+      rent: 7500,
+      rating: 4.5,
+      distance: 0.5,
+      amenities: ['3 Meals (North/South)', 'High-Speed WiFi', '24/7 Security & CCTV', 'Hot Water Geyser', 'RO Purified Water', 'Washing Machine'],
+      sharing: ['Single', 'Double', 'Triple'],
+    },
+    {
+      name: 'MM Residency PG',
+      gender: 'Gents',
+      rent: 6800,
+      rating: 4.2,
+      distance: 0.6,
+      amenities: ['3 Times Hygienic Food', 'High-Speed WiFi', 'Parking Space', 'Hot Water', 'Power Backup', 'Daily Cleaning'],
+      sharing: ['Double', 'Triple'],
+    },
+    {
+      name: 'Sri Sai Krupa Luxury Ladies PG',
+      gender: 'Ladies',
+      rent: 7200,
+      rating: 4.4,
+      distance: 0.5,
+      amenities: ['3 Meals Included', 'High-Speed WiFi', 'CCTV Security', 'Hot Water', 'Power Backup', 'RO Drinking Water'],
+      sharing: ['Double', 'Triple'],
+    },
+    {
+      name: 'Balaji Executive Gents PG',
+      gender: 'Gents',
+      rent: 6200,
+      rating: 4.1,
+      distance: 0.7,
+      amenities: ['Food Included', 'WiFi', 'CCTV Security', 'Hot Water', 'Power Backup', 'Two-Wheeler Parking'],
+      sharing: ['Double', 'Triple'],
+    },
+  ],
+
+  // Hebbal / Atria Institute of Technology
+  'Hebbal': [
+    {
+      name: 'Stanza Living Dublin House',
+      gender: 'Coliving',
+      rent: 14500,
+      rating: 4.8,
+      distance: 0.5,
+      amenities: ['Chef Curated Meals', 'High-Speed WiFi', 'AC Rooms', 'Fitness Lounge', 'Biometric Access', 'Laundry'],
+      sharing: ['Single', 'Double'],
+    },
+    {
+      name: 'Blossom Stay Ladies PG',
+      gender: 'Ladies',
+      rent: 8000,
+      rating: 4.5,
+      distance: 0.4,
+      amenities: ['3 Meals (North/South)', 'High-Speed WiFi', '24/7 Security & CCTV', 'Hot Water', 'RO Water', 'Daily Cleaning'],
+      sharing: ['Single', 'Double', 'Triple'],
+    },
+    {
+      name: 'Sri Sai Krupa Gents PG',
+      gender: 'Gents',
+      rent: 7000,
+      rating: 4.3,
+      distance: 0.3,
+      amenities: ['3 Times Food', 'High-Speed WiFi', 'Two-Wheeler Parking', 'Washing Machine', 'Hot Water', 'Power Backup'],
+      sharing: ['Double', 'Triple'],
+    },
+    {
+      name: 'Zolo Amber Coliving',
+      gender: 'Coliving',
+      rent: 12500,
+      rating: 4.6,
+      distance: 0.6,
+      amenities: ['Food Included', 'High-Speed WiFi', 'AC Rooms', 'Housekeeping', 'Power Backup', 'CCTV'],
+      sharing: ['Single', 'Double'],
+    },
+    {
+      name: 'Royal Comforts PG for Men',
+      gender: 'Gents',
+      rent: 6500,
+      rating: 4.2,
+      distance: 0.5,
+      amenities: ['3 Meals Included', 'High-Speed WiFi', 'Parking', 'Hot Water', 'Power Backup', 'RO Drinking Water'],
+      sharing: ['Double', 'Triple'],
+    },
+  ],
+
+  // Rajarajeshwari Nagar / RNSIT / JSSATE / RRCE
+  'Rajarajeshwari Nagar': [
+    {
+      name: 'Stanza Living Oxford House',
+      gender: 'Coliving',
+      rent: 14000,
+      rating: 4.7,
+      distance: 0.5,
+      amenities: ['Chef Curated Meals', 'High-Speed WiFi', 'AC Rooms', 'Gym & Fitness', 'Biometric Access', 'Housekeeping'],
+      sharing: ['Single', 'Double'],
+    },
+    {
+      name: 'Sri Balaji Deluxe Ladies PG',
+      gender: 'Ladies',
+      rent: 7800,
+      rating: 4.5,
+      distance: 0.3,
+      amenities: ['3 North & South Meals', 'High-Speed WiFi', '24/7 Security & CCTV', 'Hot Water', 'RO Purified Water', 'Washing Machine'],
+      sharing: ['Double', 'Triple'],
+    },
+    {
+      name: 'Venkateshwara Gents PG',
+      gender: 'Gents',
+      rent: 6800,
+      rating: 4.3,
+      distance: 0.4,
+      amenities: ['3 Times Hygienic Food', 'High-Speed WiFi', 'Parking', 'Washing Machine', 'Hot Water', 'Power Backup'],
+      sharing: ['Double', 'Triple'],
+    },
+    {
+      name: 'Royal Comforts Coliving',
+      gender: 'Coliving',
+      rent: 11500,
+      rating: 4.6,
+      distance: 0.5,
+      amenities: ['Food Included', 'High-Speed WiFi', 'AC Rooms', 'Housekeeping', 'Power Backup', 'Attached Bathroom'],
+      sharing: ['Single', 'Double'],
+    },
+    {
+      name: 'Sri Sai Krupa Student PG',
+      gender: 'Gents',
+      rent: 6200,
+      rating: 4.2,
+      distance: 0.5,
+      amenities: ['3 Meals Included', 'High-Speed WiFi', 'CCTV Security', 'Hot Water', 'Power Backup', 'RO Drinking Water'],
+      sharing: ['Double', 'Triple'],
+    },
+  ],
 };
 
 // Distinct authentic PG brand & hostel templates for other Bangalore areas
@@ -3463,19 +3794,45 @@ function generateAllPgs(collegesList: College[]): PgListing[] {
   collegesList.forEach((c, collegeIdx) => {
     const rawArea = c.area || 'Bangalore';
     const cleanCollegeName = c.name.split('(')[0].trim();
+    const collegeLower = c.name.toLowerCase();
 
-    // Check if we have directly curated authentic PGs for this area
-    const matchingKey = Object.keys(AUTHENTIC_BANGALORE_PGS).find(
-      (k) => rawArea.toLowerCase().includes(k.toLowerCase()) || k.toLowerCase().includes(rawArea.toLowerCase())
-    );
+    // Explicit college matching for highest precision
+    let matchingKey: string | undefined;
+
+    if (
+      collegeLower.includes('ambedkar') ||
+      collegeLower.includes('drait') ||
+      collegeLower.includes('dr. ait') ||
+      c.id === 'col-29'
+    ) {
+      matchingKey = 'Mallathahalli';
+    } else if (
+      collegeLower.includes('acharya') ||
+      c.id === 'col-30'
+    ) {
+      matchingKey = 'Soladevanahalli';
+    } else if (
+      collegeLower.includes('east west') ||
+      collegeLower.includes('ewit')
+    ) {
+      matchingKey = 'Magadi Road';
+    } else if (
+      collegeLower.includes('atria')
+    ) {
+      matchingKey = 'Hebbal';
+    } else {
+      matchingKey = Object.keys(AUTHENTIC_BANGALORE_PGS).find(
+        (k) => rawArea.toLowerCase().includes(k.toLowerCase()) || k.toLowerCase().includes(rawArea.toLowerCase())
+      );
+    }
 
     if (matchingKey && AUTHENTIC_BANGALORE_PGS[matchingKey]) {
       const baseList = AUTHENTIC_BANGALORE_PGS[matchingKey];
       baseList.forEach((item, slotIdx) => {
         // Universal Google Maps Place Search & Share URL
-        const mapsQuery = `${item.name}, ${rawArea}, Bengaluru, Karnataka`;
+        const mapsQuery = `${item.name}, ${matchingKey}, Bengaluru`;
         const googleMapsShareUrl = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(mapsQuery)}`;
-        const googleSearchUrl = `https://www.google.com/search?q=${encodeURIComponent(item.name + ' ' + rawArea + ' Bangalore')}`;
+        const googleSearchUrl = `https://www.google.com/search?q=${encodeURIComponent(item.name + ' ' + matchingKey + ' Bangalore')}`;
 
         pgs.push({
           id: `pg-${c.id}-${slotIdx + 1}`,
@@ -3487,7 +3844,7 @@ function generateAllPgs(collegesList: College[]): PgListing[] {
           distance_km: Number((item.distance + ((collegeIdx % 3) * 0.1)).toFixed(1)),
           college_id: c.id,
           college_name: c.name,
-          area: rawArea,
+          area: matchingKey,
           amenities: item.amenities,
           sharing: item.sharing,
           food_included: true,

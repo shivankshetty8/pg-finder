@@ -51,10 +51,22 @@ function CollegeSearchBar({
 
   const filtered = useMemo(() => {
     if (!query.trim()) return colleges;
-    const q = query.toLowerCase();
-    return colleges.filter(
-      (c) => c.name.toLowerCase().includes(q) || (c.area?.toLowerCase().includes(q) ?? false)
-    );
+    const q = query.toLowerCase().trim();
+    const cleanQ = q.replace(/[\s\.\-_]/g, '');
+    return colleges.filter((c) => {
+      const name = c.name.toLowerCase();
+      const area = (c.area || '').toLowerCase();
+      const cleanName = name.replace(/[\s\.\-_]/g, '');
+      const cleanArea = area.replace(/[\s\.\-_]/g, '');
+
+      return (
+        name.includes(q) ||
+        area.includes(q) ||
+        cleanName.includes(cleanQ) ||
+        cleanArea.includes(cleanQ) ||
+        (cleanQ.includes('drait') && (cleanName.includes('drait') || name.includes('ambedkar')))
+      );
+    });
   }, [query, colleges]);
 
   useEffect(() => {

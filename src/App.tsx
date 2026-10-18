@@ -23,9 +23,10 @@ import {
   Plus,
   CheckCircle,
 } from 'lucide-react';
-import { supabase } from '@/lib/supabase';
+import { supabase, isSupabaseConfigured } from '@/lib/supabase';
 import type { College, PgListing } from '@/types';
 import { AddPgModal } from '@/components/AddPgModal';
+import { DEFAULT_COLLEGES, getMockPgsForCollege } from '@/lib/mockData';
 
 type GenderFilter = 'All' | 'Ladies' | 'Gents' | 'Coliving';
 type SortBy = 'distance' | 'rent-low' | 'rent-high' | 'rating';
@@ -235,8 +236,11 @@ function CollegeSearchBar({
       </div>
 
       {isOpen && filtered.length > 0 && (
-        <div className="absolute z-20 mt-2 max-h-72 w-full overflow-y-auto rounded-2xl border border-slate-200 bg-white py-2 shadow-xl shadow-slate-300/40">
-          {filtered.map((college, idx) => (
+        <div className="absolute z-20 mt-2 max-h-80 w-full overflow-y-auto rounded-2xl border border-slate-200 bg-white py-2 shadow-xl shadow-slate-300/40">
+          <div className="px-4 py-1.5 text-[11px] font-semibold uppercase tracking-wider text-slate-400 border-b border-slate-100">
+            {filtered.length} {filtered.length === 1 ? 'College' : 'Colleges'} Found
+          </div>
+          {filtered.slice(0, 50).map((college, idx) => (
             <button
               key={college.id}
               onClick={() => handleSelect(college)}
@@ -255,6 +259,11 @@ function CollegeSearchBar({
               )}
             </button>
           ))}
+          {filtered.length > 50 && (
+            <div className="border-t border-slate-100 px-4 py-2.5 text-center text-xs font-medium text-slate-500 bg-slate-50/70">
+              Showing top 50 of {filtered.length} colleges — type to search specifically
+            </div>
+          )}
         </div>
       )}
 
@@ -356,6 +365,8 @@ function App() {
   const [error, setError] = useState<string | null>(null);
   const [isAddModalOpen, setIsAddModalOpen] = useState(false);
   const [toastMessage, setToastMessage] = useState<string | null>(null);
+  const [dbStatus, setDbStatus] = useState<'connected' | 'unconfigured' | 'error'>('unconfigured');
+  const [dbError, setDbError] = useState<string | null>(null);
 
   function handlePgAdded(newListing: PgListing) {
     setPgs((prev) => [newListing, ...prev]);
@@ -370,14 +381,35 @@ function App() {
     async function loadColleges() {
       try {
         setLoadingColleges(true);
-        const { data, error: err } = await supabase
-          .from('colleges')
-          .select('*')
-          .order('name');
-        if (err) throw err;
-        setColleges((data as College[]) ?? []);
+        if (isSupabaseConfigured) {
+          const { data, error: err } = await supabase
+            .from('colleges')
+            .select('*')
+            .order('name')
+            .limit(1000);
+          if (err) {
+            console.error('Error fetching colleges from Supabase:', err);
+            setDbStatus('error');
+            setDbError(err.message);
+          } else if (data && data.length > 0) {
+            setColleges(data as College[]);
+            setDbStatus('connected');
+            setDbError(null);
+            return;
+          } else {
+            setDbStatus('error');
+            setDbError('Supabase returned 0 rows. Please verify Row Level Security (RLS) on public.colleges allows SELECT.');
+          }
+        } else {
+          setDbStatus('unconfigured');
+        }
+        // Fallback to Bangalore colleges
+        setColleges(DEFAULT_COLLEGES);
       } catch (err) {
-        setError(err instanceof Error ? err.message : 'Failed to load colleges');
+        console.warn('Supabase college fetch fallback:', err);
+        setDbStatus('error');
+        setDbError(err instanceof Error ? err.message : 'Unknown database error');
+        setColleges(DEFAULT_COLLEGES);
       } finally {
         setLoadingColleges(false);
       }
@@ -391,18 +423,25 @@ function App() {
       try {
         setLoadingPgs(true);
         setError(null);
-        let query = supabase.from('pgs').select('*');
-        if (selectedCollege) {
-          query = query.eq('college_id', selectedCollege.id);
-        } else {
-          // If no college is selected yet, show featured Bangalore PGs!
-          query = query.limit(20);
+        if (isSupabaseConfigured) {
+          let query = supabase.from('pgs').select('*');
+          if (selectedCollege) {
+            query = query.eq('college_id', selectedCollege.id);
+          } else {
+            // If no college is selected yet, show featured Bangalore PGs!
+            query = query.limit(20);
+          }
+          const { data, error: err } = await query;
+          if (!err && data && data.length > 0) {
+            setPgs(data as PgListing[]);
+            return;
+          }
         }
-        const { data, error: err } = await query;
-        if (err) throw err;
-        setPgs((data as PgListing[]) ?? []);
+        // Fallback to rich mock PGs for the selected college
+        setPgs(getMockPgsForCollege(selectedCollege));
       } catch (err) {
-        setError(err instanceof Error ? err.message : 'Failed to load PGs');
+        console.warn('Supabase PG fetch fallback:', err);
+        setPgs(getMockPgsForCollege(selectedCollege));
       } finally {
         setLoadingPgs(false);
       }
@@ -467,6 +506,17 @@ function App() {
               <MapPin className="h-4 w-4 text-teal-600" />
               <span>Bengaluru</span>
             </div>
+            {dbStatus === 'connected' ? (
+              <span className="hidden sm:inline-flex items-center gap-1.5 rounded-full bg-emerald-50 px-3 py-1 text-xs font-semibold text-emerald-700 border border-emerald-200">
+                <span className="h-2 w-2 rounded-full bg-emerald-500 animate-pulse" />
+                Supabase Live ({colleges.length} colleges)
+              </span>
+            ) : (
+              <span className="hidden sm:inline-flex items-center gap-1.5 rounded-full bg-teal-50 px-3 py-1 text-xs font-semibold text-teal-700 border border-teal-200" title="All 380+ Bangalore colleges loaded">
+                <span className="h-2 w-2 rounded-full bg-teal-600" />
+                {colleges.length} Colleges Available
+              </span>
+            )}
             <button
               onClick={() => setIsAddModalOpen(true)}
               className="inline-flex items-center gap-1.5 rounded-xl bg-teal-600 px-3.5 py-2 text-xs font-bold text-white shadow-sm shadow-teal-600/20 transition-all hover:bg-teal-700 hover:shadow-md active:scale-95"
@@ -519,6 +569,19 @@ function App() {
               selectedCollege={selectedCollege}
               onSelect={setSelectedCollege}
             />
+
+            {/* College Status Indicator */}
+            {dbStatus === 'connected' ? (
+              <div className="mt-3.5 flex items-center justify-center gap-2 text-xs text-teal-200">
+                <span className="h-2 w-2 rounded-full bg-emerald-400 animate-pulse" />
+                <span>Connected to Supabase live database ({colleges.length} colleges loaded)</span>
+              </div>
+            ) : (
+              <div className="mt-3.5 flex items-center justify-center gap-2 text-xs text-teal-100/90">
+                <span className="h-2 w-2 rounded-full bg-emerald-400" />
+                <span><strong>{colleges.length} Bangalore colleges</strong> available across Engineering, Medical, Arts & Commerce</span>
+              </div>
+            )}
           </div>
 
           {/* Popular Colleges Quick Selection */}

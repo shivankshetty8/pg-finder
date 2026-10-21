@@ -3370,7 +3370,7 @@ function generatePgsForSingleCollege(c: College, collegeIdx: number = 0): PgList
     const specificList = SPECIFIC_CAMPUS_PGS[c.id];
     return specificList.map((item, slotIdx) => {
       // Direct Google Maps place URL resolving to exact place profile
-      const googleMapsUrl = `https://www.google.com/maps/place/${encodeURIComponent(item.name)}`;
+      const googleMapsUrl = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(item.name)}`;
       const googleSearchUrl = `https://www.google.com/search?q=${encodeURIComponent(item.name + ' reviews')}`;
 
       return {
@@ -3447,7 +3447,7 @@ function generatePgsForSingleCollege(c: College, collegeIdx: number = 0): PgList
   ];
 
   return exactTemplates.map((item, slotIdx) => {
-    const googleMapsUrl = `https://www.google.com/maps/place/${encodeURIComponent(item.name)}`;
+    const googleMapsUrl = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(item.name)}`;
     const googleSearchUrl = `https://www.google.com/search?q=${encodeURIComponent(item.name + ' Bangalore reviews photos')}`;
 
     return {

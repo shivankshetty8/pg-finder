@@ -339,7 +339,9 @@ function PgCard({ pg, college }: { pg: PgListing; college: College }) {
         <SwipeToRedirect
           url={
             pg.google_url ||
-            `https://www.google.com/maps/place/${encodeURIComponent(pg.name)}`
+            `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(
+              pg.name + ', ' + (pg.area || college.area || 'Bangalore')
+            )}`
           }
           searchUrl={
             pg.google_search_url ||

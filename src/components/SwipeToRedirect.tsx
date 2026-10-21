@@ -38,10 +38,11 @@ export default function SwipeToRedirect({
 
   // Ensure clean, verified Google Maps Place URL that resolves directly to the exact PG business listing
   const getCleanMapsUrl = () => {
-    if (url && !url.includes('/maps/place//') && !url.includes('/maps/search/')) {
+    if (url && !url.includes('/maps/place//')) {
       return url;
     }
-    return `https://www.google.com/maps/place/${encodeURIComponent(pgName)}`;
+    const cleanQuery = `${pgName}, ${area || 'Bangalore'}, Bengaluru`;
+    return `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(cleanQuery)}`;
   };
 
   const triggerRedirect = (targetUrl?: string) => {

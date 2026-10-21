@@ -2711,21 +2711,11 @@ const SPECIFIC_CAMPUS_PGS: Record<
     reviews_count: number;
     amenities: string[];
     sharing: string[];
+    google_url?: string;
   }>
 > = {
   // BMS College of Engineering (BMSCE - Basavanagudi / Bull Temple Road)
   'col-2': [
-    {
-      name: 'Chegus Perennial Boys pg in basavanagudi',
-      gender: 'Gents',
-      rent: 7500,
-      rating: 4.3,
-      distance: 0.3,
-      area: '71, Krishna Rajendra Rd, Basavanagudi',
-      reviews_count: 208,
-      amenities: ['3 Times Hygienic Food', 'High-Speed WiFi', 'Two-Wheeler Dedicated Parking', 'Washing Machine', 'Hot Water 24/7', 'Power Backup', 'Daily Cleaning'],
-      sharing: ['Double', 'Triple'],
-    },
     {
       name: 'Yashaswi Boy\'s PG, Basavanagudi',
       gender: 'Gents',
@@ -2736,6 +2726,7 @@ const SPECIFIC_CAMPUS_PGS: Record<
       reviews_count: 130,
       amenities: ['3 Meals Included', 'High-Speed WiFi', 'Attached Bathroom', 'Hot Water', 'Power Backup', 'RO Water'],
       sharing: ['Double', 'Triple'],
+      google_url: 'https://maps.app.goo.gl/r8DyUPCJhwoY7y8KA',
     },
     {
       name: 'Nest Stay Home, Basavanagudi',
@@ -2747,17 +2738,31 @@ const SPECIFIC_CAMPUS_PGS: Record<
       reviews_count: 95,
       amenities: ['3 Times Food (Buffet)', 'High-Speed WiFi', 'Power Backup', 'Daily Housekeeping', '24/7 CCTV', 'Washing Machine', 'Attached Bath'],
       sharing: ['Single', 'Double'],
+      google_url: 'https://maps.app.goo.gl/BoyffP1Kjip9TvaV7',
     },
     {
-      name: 'Flourish PG for Women, Basavanagudi',
+      name: 'Chegus Oasis Ladies PG, Basavanagudi',
       gender: 'Ladies',
       rent: 8200,
       rating: 4.6,
       distance: 0.35,
-      area: 'Basavanagudi',
+      area: 'Subbarama Chetty Road, Basavanagudi',
       reviews_count: 80,
       amenities: ['3 Meals (North/South)', 'High-Speed WiFi', '24/7 CCTV & Security', 'Hot Water Geyser', 'RO Purified Water', 'Daily Cleaning'],
       sharing: ['Single', 'Double', 'Triple'],
+      google_url: 'https://maps.app.goo.gl/jYa3G6k7pouAEA879',
+    },
+    {
+      name: 'Chegus Perennial Boys pg in basavanagudi',
+      gender: 'Gents',
+      rent: 7500,
+      rating: 4.3,
+      distance: 0.3,
+      area: '71, Krishna Rajendra Rd, Basavanagudi',
+      reviews_count: 208,
+      amenities: ['3 Times Hygienic Food', 'High-Speed WiFi', 'Two-Wheeler Dedicated Parking', 'Washing Machine', 'Hot Water 24/7', 'Power Backup', 'Daily Cleaning'],
+      sharing: ['Double', 'Triple'],
+      google_url: 'https://maps.app.goo.gl/nTmULBCY6ifLv5bQ6',
     },
     {
       name: 'Sri Nirman Women\'s Hostel, Basavanagudi',
@@ -2769,11 +2774,48 @@ const SPECIFIC_CAMPUS_PGS: Record<
       reviews_count: 65,
       amenities: ['3 Meals Included', 'High-Speed WiFi', '24/7 Security Guard', 'Hot Water', 'RO Water', 'Washing Machine'],
       sharing: ['Double', 'Triple'],
+      google_url: 'https://maps.app.goo.gl/jYa3G6k7pouAEA879',
     },
   ],
 
   // Bangalore Institute of Technology (BIT - KR Road / Basavanagudi)
   'col-8': [
+    {
+      name: 'Yashaswi Boy\'s PG, Basavanagudi',
+      gender: 'Gents',
+      rent: 7000,
+      rating: 4.4,
+      distance: 0.35,
+      area: '78, Model House St, Basavanagudi',
+      reviews_count: 130,
+      amenities: ['3 Meals Included', 'High-Speed WiFi', 'Attached Bathroom', 'Hot Water', 'Power Backup', 'RO Water'],
+      sharing: ['Double', 'Triple'],
+      google_url: 'https://maps.app.goo.gl/r8DyUPCJhwoY7y8KA',
+    },
+    {
+      name: 'Nest Stay Home, Basavanagudi',
+      gender: 'Coliving',
+      rent: 11000,
+      rating: 4.7,
+      distance: 0.3,
+      area: 'Bull Temple Road, Basavanagudi',
+      reviews_count: 95,
+      amenities: ['3 Times Food (Buffet)', 'High-Speed WiFi', 'Power Backup', 'Daily Housekeeping', '24/7 CCTV', 'Washing Machine', 'Attached Bath'],
+      sharing: ['Single', 'Double'],
+      google_url: 'https://maps.app.goo.gl/BoyffP1Kjip9TvaV7',
+    },
+    {
+      name: 'Chegus Oasis Ladies PG, Basavanagudi',
+      gender: 'Ladies',
+      rent: 8200,
+      rating: 4.6,
+      distance: 0.35,
+      area: 'Subbarama Chetty Road, Basavanagudi',
+      reviews_count: 80,
+      amenities: ['3 Meals (North/South)', 'High-Speed WiFi', '24/7 CCTV & Security', 'Hot Water Geyser', 'RO Purified Water', 'Daily Cleaning'],
+      sharing: ['Single', 'Double', 'Triple'],
+      google_url: 'https://maps.app.goo.gl/jYa3G6k7pouAEA879',
+    },
     {
       name: 'Chegus Perennial Boys pg in basavanagudi',
       gender: 'Gents',
@@ -2784,39 +2826,7 @@ const SPECIFIC_CAMPUS_PGS: Record<
       reviews_count: 208,
       amenities: ['3 Times Hygienic Food', 'High-Speed WiFi', 'Two-Wheeler Dedicated Parking', 'Washing Machine', 'Hot Water 24/7', 'Power Backup', 'Daily Cleaning'],
       sharing: ['Double', 'Triple'],
-    },
-    {
-      name: 'Yashaswi Boy\'s PG, Basavanagudi',
-      gender: 'Gents',
-      rent: 7000,
-      rating: 4.4,
-      distance: 0.35,
-      area: '78, Model House St, Basavanagudi',
-      reviews_count: 130,
-      amenities: ['3 Meals Included', 'High-Speed WiFi', 'Attached Bathroom', 'Hot Water', 'Power Backup', 'RO Water'],
-      sharing: ['Double', 'Triple'],
-    },
-    {
-      name: 'Nest Stay Home, Basavanagudi',
-      gender: 'Coliving',
-      rent: 11000,
-      rating: 4.7,
-      distance: 0.3,
-      area: 'Bull Temple Road, Basavanagudi',
-      reviews_count: 95,
-      amenities: ['3 Times Food (Buffet)', 'High-Speed WiFi', 'Power Backup', 'Daily Housekeeping', '24/7 CCTV', 'Washing Machine', 'Attached Bath'],
-      sharing: ['Single', 'Double'],
-    },
-    {
-      name: 'Flourish PG for Women, Basavanagudi',
-      gender: 'Ladies',
-      rent: 8200,
-      rating: 4.6,
-      distance: 0.35,
-      area: 'Basavanagudi',
-      reviews_count: 80,
-      amenities: ['3 Meals (North/South)', 'High-Speed WiFi', '24/7 CCTV & Security', 'Hot Water Geyser', 'RO Purified Water', 'Daily Cleaning'],
-      sharing: ['Single', 'Double', 'Triple'],
+      google_url: 'https://maps.app.goo.gl/nTmULBCY6ifLv5bQ6',
     },
     {
       name: 'Sri Nirman Women\'s Hostel, Basavanagudi',
@@ -2828,6 +2838,7 @@ const SPECIFIC_CAMPUS_PGS: Record<
       reviews_count: 65,
       amenities: ['3 Meals Included', 'High-Speed WiFi', '24/7 Security Guard', 'Hot Water', 'RO Water', 'Washing Machine'],
       sharing: ['Double', 'Triple'],
+      google_url: 'https://maps.app.goo.gl/jYa3G6k7pouAEA879',
     },
   ],
 
@@ -3369,8 +3380,8 @@ function generatePgsForSingleCollege(c: College, collegeIdx: number = 0): PgList
   if (SPECIFIC_CAMPUS_PGS[c.id]) {
     const specificList = SPECIFIC_CAMPUS_PGS[c.id];
     return specificList.map((item, slotIdx) => {
-      // Direct Google Maps place URL resolving to exact place profile
-      const googleMapsUrl = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(item.name)}`;
+      // Prioritize verified Google Maps Share Link (maps.app.goo.gl)
+      const googleMapsUrl = item.google_url || `https://maps.google.com/?q=${encodeURIComponent(item.name + ', ' + item.area)}`;
       const googleSearchUrl = `https://www.google.com/search?q=${encodeURIComponent(item.name + ' reviews')}`;
 
       return {

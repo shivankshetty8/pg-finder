@@ -1,10 +1,12 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { ChevronRight, ExternalLink, Check, Sparkles, MapPin, Search } from 'lucide-react';
+import { ChevronRight, ExternalLink, Check, Sparkles, MapPin, Search, Share2, Navigation, Copy } from 'lucide-react';
 
 interface SwipeToRedirectProps {
   url: string;
   searchUrl?: string;
   pgName: string;
+  collegeName?: string;
+  area?: string;
   label?: string;
   className?: string;
 }
@@ -13,12 +15,15 @@ export default function SwipeToRedirect({
   url,
   searchUrl,
   pgName,
-  label = 'Slide to Open Google Place & Share',
+  collegeName,
+  area,
+  label = 'Slide to Open Exact Google Place & Share',
   className = '',
 }: SwipeToRedirectProps) {
   const [dragX, setDragX] = useState(0);
   const [isDragging, setIsDragging] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
+  const [copied, setCopied] = useState(false);
   const trackRef = useRef<HTMLDivElement>(null);
   const startXRef = useRef(0);
   const isDraggingRef = useRef(false);
@@ -31,19 +36,64 @@ export default function SwipeToRedirect({
     return Math.max(0, trackRef.current.clientWidth - KNOB_WIDTH - KNOB_MARGIN * 2);
   };
 
+  // Ensure place URL opens direct Place profile rather than search bar query
+  const formatPlaceUrl = (targetUrl?: string) => {
+    const rawUrl = targetUrl || url;
+    if (rawUrl.includes('/maps/search/')) {
+      const match = rawUrl.match(/query=([^&]+)/);
+      if (match && match[1]) {
+        return `https://www.google.com/maps/place/${match[1]}`;
+      }
+    }
+    return rawUrl;
+  };
+
   const triggerRedirect = (targetUrl?: string) => {
     setIsSuccess(true);
     if (typeof navigator !== 'undefined' && navigator.vibrate) {
       navigator.vibrate(40);
     }
-    // Open Google Maps / Google Place in new tab
-    window.open(targetUrl || url, '_blank', 'noopener,noreferrer');
+
+    const placeUrl = formatPlaceUrl(targetUrl);
+    // Direct place card in new tab
+    window.open(placeUrl, '_blank', 'noopener,noreferrer');
 
     // Reset after delay
     setTimeout(() => {
       setDragX(0);
       setIsSuccess(false);
-    }, 1300);
+    }, 1500);
+  };
+
+  // Direct Share action (native mobile share sheet or copy place link)
+  const handleShare = async (e: React.MouseEvent) => {
+    e.stopPropagation();
+    const placeUrl = formatPlaceUrl();
+    const shareText = `Check out ${pgName} (Paying Guest Accommodation) near ${collegeName || 'college'} on Google Maps:`;
+
+    if (typeof navigator !== 'undefined' && navigator.share) {
+      try {
+        await navigator.share({
+          title: `${pgName} - Google Maps Place`,
+          text: shareText,
+          url: placeUrl,
+        });
+        return;
+      } catch (err) {
+        // User cancelled or share unavailable, fall through to clipboard
+      }
+    }
+
+    if (typeof navigator !== 'undefined' && navigator.clipboard) {
+      try {
+        await navigator.clipboard.writeText(placeUrl);
+        setCopied(true);
+        setTimeout(() => setCopied(false), 2200);
+      } catch {
+        // Fallback open
+        window.open(placeUrl, '_blank');
+      }
+    }
   };
 
   const handleStart = (clientX: number) => {
@@ -99,6 +149,11 @@ export default function SwipeToRedirect({
     };
   }, [isDragging, dragX]);
 
+  const placeUrl = formatPlaceUrl();
+  const directionsUrl = `https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent(
+    pgName + (area ? ', ' + area : '') + ', Bengaluru'
+  )}`;
+
   return (
     <div className={`relative w-full ${className}`}>
       {/* Slider Track */}
@@ -111,7 +166,7 @@ export default function SwipeToRedirect({
           }
         }}
         className="group relative flex h-12 w-full cursor-pointer select-none items-center overflow-hidden rounded-2xl border border-purple-500/35 bg-gradient-to-r from-zinc-950/95 via-purple-950/30 to-zinc-950/95 shadow-[0_0_20px_rgba(168,85,247,0.18)] backdrop-blur-xl transition-all duration-300 hover:border-purple-400/70 hover:shadow-[0_0_25px_rgba(168,85,247,0.35)]"
-        title={`Slide or click to view ${pgName} on Google Place & Share`}
+        title={`Slide or click to view ${pgName} on Google Place profile & Share`}
       >
         {/* Glowing Progress Fill */}
         <div
@@ -124,7 +179,7 @@ export default function SwipeToRedirect({
           {isSuccess ? (
             <span className="flex items-center gap-1.5 text-xs font-bold uppercase tracking-wider text-emerald-300 animate-pulse">
               <Check className="h-3.5 w-3.5" />
-              Opening Google Place & Share...
+              Opening Exact Google Place Card...
             </span>
           ) : (
             <div className="flex items-center gap-1 text-[11px] font-bold uppercase tracking-wider text-purple-200/90 transition-colors group-hover:text-purple-100 sm:text-xs">
@@ -166,33 +221,72 @@ export default function SwipeToRedirect({
         </div>
       </div>
 
-      {/* Direct Action Links */}
-      <div className="mt-2 flex items-center justify-between px-1 text-[11px] text-zinc-400">
-        <span className="text-zinc-500 hidden sm:inline">Slide to open Google Place card</span>
-        <div className="flex items-center gap-3 ml-auto">
+      {/* Direct Action Links & Quick Actions */}
+      <div className="mt-2.5 flex flex-wrap items-center justify-between gap-2 px-1 text-[11px]">
+        {/* Direct Google Place link */}
+        <a
+          href={placeUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+          onClick={(e) => e.stopPropagation()}
+          className="inline-flex items-center gap-1 font-semibold text-purple-400 hover:text-purple-300 hover:underline transition-colors"
+          title="Open exact Google Place card directly"
+        >
+          <MapPin className="h-3 w-3 text-purple-400" />
+          <span>Google Place Card</span>
+          <ExternalLink className="h-2.5 w-2.5" />
+        </a>
+
+        <div className="flex items-center gap-2.5 ml-auto">
+          {/* Share Button (Web Share / Copy Link) */}
+          <button
+            type="button"
+            onClick={handleShare}
+            className={`inline-flex items-center gap-1 rounded-md px-2 py-0.5 text-[10px] font-semibold transition-all ${
+              copied
+                ? 'bg-emerald-950 text-emerald-300 border border-emerald-500/50'
+                : 'bg-purple-950/70 text-purple-300 border border-purple-500/30 hover:bg-purple-900/80 hover:text-white'
+            }`}
+            title="Share this PG's Google Place link via WhatsApp, Telegram, or copy"
+          >
+            {copied ? (
+              <>
+                <Check className="h-2.5 w-2.5 text-emerald-400" />
+                <span>Copied Link!</span>
+              </>
+            ) : (
+              <>
+                <Share2 className="h-2.5 w-2.5 text-purple-400" />
+                <span>Share Place</span>
+              </>
+            )}
+          </button>
+
+          {/* Directions button */}
           <a
-            href={url}
+            href={directionsUrl}
             target="_blank"
             rel="noopener noreferrer"
             onClick={(e) => e.stopPropagation()}
-            className="inline-flex items-center gap-1 font-semibold text-purple-400 hover:text-purple-300 hover:underline"
+            className="inline-flex items-center gap-1 font-medium text-zinc-400 hover:text-purple-300 hover:underline transition-colors"
+            title="Get directions on Google Maps"
           >
-            <MapPin className="h-3 w-3 text-purple-400" />
-            <span>Google Maps & Share</span>
-            <ExternalLink className="h-2.5 w-2.5" />
+            <Navigation className="h-2.5 w-2.5 text-zinc-400" />
+            <span>Directions</span>
           </a>
 
+          {/* Reviews search */}
           {searchUrl && (
             <a
               href={searchUrl}
               target="_blank"
               rel="noopener noreferrer"
               onClick={(e) => e.stopPropagation()}
-              className="inline-flex items-center gap-1 font-medium text-zinc-400 hover:text-purple-300 hover:underline"
+              className="inline-flex items-center gap-1 font-medium text-zinc-400 hover:text-purple-300 hover:underline transition-colors"
+              title="Read verified reviews & ratings"
             >
-              <Search className="h-3 w-3 text-zinc-400" />
+              <Search className="h-2.5 w-2.5 text-zinc-400" />
               <span>Reviews</span>
-              <ExternalLink className="h-2.5 w-2.5" />
             </a>
           )}
         </div>

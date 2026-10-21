@@ -36,13 +36,12 @@ export default function SwipeToRedirect({
     return Math.max(0, trackRef.current.clientWidth - KNOB_WIDTH - KNOB_MARGIN * 2);
   };
 
-  // Ensure clean, verified Google Maps Place URL that resolves directly to the PG
+  // Ensure clean, verified Google Maps Place URL that resolves directly to the exact PG business listing
   const getCleanMapsUrl = () => {
-    if (url && !url.includes('/maps/place//')) {
+    if (url && !url.includes('/maps/place//') && !url.includes('/maps/search/')) {
       return url;
     }
-    const cleanQuery = `${pgName}, ${area || 'Bangalore'}, Bengaluru`;
-    return `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(cleanQuery)}`;
+    return `https://www.google.com/maps/place/${encodeURIComponent(pgName)}`;
   };
 
   const triggerRedirect = (targetUrl?: string) => {

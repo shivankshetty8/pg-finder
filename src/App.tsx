@@ -339,20 +339,20 @@ function PgCard({ pg, college }: { pg: PgListing; college: College }) {
         <SwipeToRedirect
           url={
             pg.google_url ||
-            `https://www.google.com/maps/place/${encodeURIComponent(
-              pg.name + ', ' + (pg.area || college.area || 'Bangalore') + ', Bengaluru, Karnataka'
+            `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(
+              pg.name + ', ' + (pg.area || college.area || 'Bangalore') + ', Bengaluru'
             )}`
           }
           searchUrl={
             pg.google_search_url ||
             `https://www.google.com/search?q=${encodeURIComponent(
-              pg.name + ' ' + (pg.area || college.area || 'Bangalore') + ' Bangalore'
+              pg.name + ' ' + (pg.area || college.area || 'Bangalore') + ' Bangalore reviews photos'
             )}`
           }
           pgName={pg.name}
           collegeName={college.name}
           area={pg.area || college.area}
-          label="Slide to Open Exact Google Place & Share"
+          label="Slide to Open on Google Maps & Share"
         />
       </div>
     </div>

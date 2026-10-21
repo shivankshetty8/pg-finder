@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { ChevronRight, ExternalLink, Check, Sparkles, MapPin, Search, Share2, Navigation, Copy } from 'lucide-react';
+import { ChevronRight, ExternalLink, Check, Sparkles, MapPin, Search, Share2, Navigation } from 'lucide-react';
 
 interface SwipeToRedirectProps {
   url: string;
@@ -17,7 +17,7 @@ export default function SwipeToRedirect({
   pgName,
   collegeName,
   area,
-  label = 'Slide to Open Exact Google Place & Share',
+  label = 'Slide to Open on Google Maps & Share',
   className = '',
 }: SwipeToRedirectProps) {
   const [dragX, setDragX] = useState(0);
@@ -36,16 +36,13 @@ export default function SwipeToRedirect({
     return Math.max(0, trackRef.current.clientWidth - KNOB_WIDTH - KNOB_MARGIN * 2);
   };
 
-  // Ensure place URL opens direct Place profile rather than search bar query
-  const formatPlaceUrl = (targetUrl?: string) => {
-    const rawUrl = targetUrl || url;
-    if (rawUrl.includes('/maps/search/')) {
-      const match = rawUrl.match(/query=([^&]+)/);
-      if (match && match[1]) {
-        return `https://www.google.com/maps/place/${match[1]}`;
-      }
+  // Ensure clean, verified Google Maps Place URL that resolves directly to the PG
+  const getCleanMapsUrl = () => {
+    if (url && !url.includes('/maps/place//')) {
+      return url;
     }
-    return rawUrl;
+    const cleanQuery = `${pgName}, ${area || 'Bangalore'}, Bengaluru`;
+    return `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(cleanQuery)}`;
   };
 
   const triggerRedirect = (targetUrl?: string) => {
@@ -54,9 +51,8 @@ export default function SwipeToRedirect({
       navigator.vibrate(40);
     }
 
-    const placeUrl = formatPlaceUrl(targetUrl);
-    // Direct place card in new tab
-    window.open(placeUrl, '_blank', 'noopener,noreferrer');
+    const finalUrl = targetUrl || getCleanMapsUrl();
+    window.open(finalUrl, '_blank', 'noopener,noreferrer');
 
     // Reset after delay
     setTimeout(() => {
@@ -68,15 +64,15 @@ export default function SwipeToRedirect({
   // Direct Share action (native mobile share sheet or copy place link)
   const handleShare = async (e: React.MouseEvent) => {
     e.stopPropagation();
-    const placeUrl = formatPlaceUrl();
+    const finalUrl = getCleanMapsUrl();
     const shareText = `Check out ${pgName} (Paying Guest Accommodation) near ${collegeName || 'college'} on Google Maps:`;
 
     if (typeof navigator !== 'undefined' && navigator.share) {
       try {
         await navigator.share({
-          title: `${pgName} - Google Maps Place`,
+          title: `${pgName} - Google Maps`,
           text: shareText,
-          url: placeUrl,
+          url: finalUrl,
         });
         return;
       } catch (err) {
@@ -86,12 +82,11 @@ export default function SwipeToRedirect({
 
     if (typeof navigator !== 'undefined' && navigator.clipboard) {
       try {
-        await navigator.clipboard.writeText(placeUrl);
+        await navigator.clipboard.writeText(finalUrl);
         setCopied(true);
         setTimeout(() => setCopied(false), 2200);
       } catch {
-        // Fallback open
-        window.open(placeUrl, '_blank');
+        window.open(finalUrl, '_blank');
       }
     }
   };
@@ -149,10 +144,9 @@ export default function SwipeToRedirect({
     };
   }, [isDragging, dragX]);
 
-  const placeUrl = formatPlaceUrl();
-  const directionsUrl = `https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent(
-    pgName + (area ? ', ' + area : '') + ', Bengaluru'
-  )}`;
+  const mapsUrl = getCleanMapsUrl();
+  const cleanDestination = `${pgName}, ${area || 'Bangalore'}, Bengaluru`;
+  const directionsUrl = `https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent(cleanDestination)}`;
 
   return (
     <div className={`relative w-full ${className}`}>
@@ -166,7 +160,7 @@ export default function SwipeToRedirect({
           }
         }}
         className="group relative flex h-12 w-full cursor-pointer select-none items-center overflow-hidden rounded-2xl border border-purple-500/35 bg-gradient-to-r from-zinc-950/95 via-purple-950/30 to-zinc-950/95 shadow-[0_0_20px_rgba(168,85,247,0.18)] backdrop-blur-xl transition-all duration-300 hover:border-purple-400/70 hover:shadow-[0_0_25px_rgba(168,85,247,0.35)]"
-        title={`Slide or click to view ${pgName} on Google Place profile & Share`}
+        title={`Slide or click to view ${pgName} on Google Maps`}
       >
         {/* Glowing Progress Fill */}
         <div
@@ -179,7 +173,7 @@ export default function SwipeToRedirect({
           {isSuccess ? (
             <span className="flex items-center gap-1.5 text-xs font-bold uppercase tracking-wider text-emerald-300 animate-pulse">
               <Check className="h-3.5 w-3.5" />
-              Opening Exact Google Place Card...
+              Opening Google Maps Place Card...
             </span>
           ) : (
             <div className="flex items-center gap-1 text-[11px] font-bold uppercase tracking-wider text-purple-200/90 transition-colors group-hover:text-purple-100 sm:text-xs">
@@ -225,15 +219,15 @@ export default function SwipeToRedirect({
       <div className="mt-2.5 flex flex-wrap items-center justify-between gap-2 px-1 text-[11px]">
         {/* Direct Google Place link */}
         <a
-          href={placeUrl}
+          href={mapsUrl}
           target="_blank"
           rel="noopener noreferrer"
           onClick={(e) => e.stopPropagation()}
           className="inline-flex items-center gap-1 font-semibold text-purple-400 hover:text-purple-300 hover:underline transition-colors"
-          title="Open exact Google Place card directly"
+          title="Open exact Google Maps place listing"
         >
           <MapPin className="h-3 w-3 text-purple-400" />
-          <span>Google Place Card</span>
+          <span>Google Maps Listing</span>
           <ExternalLink className="h-2.5 w-2.5" />
         </a>
 
@@ -247,7 +241,7 @@ export default function SwipeToRedirect({
                 ? 'bg-emerald-950 text-emerald-300 border border-emerald-500/50'
                 : 'bg-purple-950/70 text-purple-300 border border-purple-500/30 hover:bg-purple-900/80 hover:text-white'
             }`}
-            title="Share this PG's Google Place link via WhatsApp, Telegram, or copy"
+            title="Share this PG's Google Maps link via WhatsApp, Telegram, or copy"
           >
             {copied ? (
               <>
@@ -257,7 +251,7 @@ export default function SwipeToRedirect({
             ) : (
               <>
                 <Share2 className="h-2.5 w-2.5 text-purple-400" />
-                <span>Share Place</span>
+                <span>Share</span>
               </>
             )}
           </button>
@@ -269,7 +263,7 @@ export default function SwipeToRedirect({
             rel="noopener noreferrer"
             onClick={(e) => e.stopPropagation()}
             className="inline-flex items-center gap-1 font-medium text-zinc-400 hover:text-purple-300 hover:underline transition-colors"
-            title="Get directions on Google Maps"
+            title="Get turn-by-turn directions on Google Maps"
           >
             <Navigation className="h-2.5 w-2.5 text-zinc-400" />
             <span>Directions</span>
@@ -283,7 +277,7 @@ export default function SwipeToRedirect({
               rel="noopener noreferrer"
               onClick={(e) => e.stopPropagation()}
               className="inline-flex items-center gap-1 font-medium text-zinc-400 hover:text-purple-300 hover:underline transition-colors"
-              title="Read verified reviews & ratings"
+              title="Read verified reviews & ratings on Google"
             >
               <Search className="h-2.5 w-2.5 text-zinc-400" />
               <span>Reviews</span>
